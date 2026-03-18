@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CGSI CFD Margin Calculator</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #ffffff;
+      --bg-secondary: #f5f5f4;
+      --bg-tertiary:  #eeece9;
+      --bg-danger:    #fce8e8;
+      --bg-warning:   #fef3e2;
+      --bg-success:   #eaf3de;
+      --bg-info:      #e6f1fb;
+      --text:          #1a1a18;
+      --text-secondary:#5f5e5a;
+      --text-tertiary: #888780;
+      --text-danger:   #a32d2d;
+      --text-warning:  #854f0b;
+      --text-success:  #3b6d11;
+      --text-info:     #185fa5;
+      --border:        rgba(0,0,0,0.12);
+      --border-md:     rgba(0,0,0,0.22);
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:           #1c1c1a;
+        --bg-secondary: #262624;
+        --bg-tertiary:  #2e2e2b;
+        --bg-danger:    #3a1a1a;
+        --bg-warning:   #3a2a10;
+        --bg-success:   #1a2e0a;
+        --bg-info:      #0c2a44;
+        --text:          #f0ede8;
+        --text-secondary:#b4b2a9;
+        --text-tertiary: #888780;
+        --text-danger:   #f09595;
+        --text-warning:  #fac775;
+        --text-success:  #97c459;
+        --text-info:     #85b7eb;
+        --border:        rgba(255,255,255,0.10);
+        --border-md:     rgba(255,255,255,0.20);
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-tertiary);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .header { margin-bottom: 2rem; }
+    .header h1 { font-size: 22px; font-weight: 600; }
+    .header p  { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+    .badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 11px;
+      padding: 3px 10px;
+      background: var(--bg-success);
+      color: var(--text-success);
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 12px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 1.25rem;
+    }
+    @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.25rem;
+    }
+    .panel-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 10px;
+    }
+    .panel-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .panel-row label { font-size: 13px; color: var(--text-secondary); white-space: nowrap; }
+    .panel-hint { font-size: 11px; color: var(--text-tertiary); margin-top: 6px; }
+
+    .cash-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 640px) { .cash-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .cash-card { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 12px 14px; }
+    .cash-card-label {
+      font-size: 11px; font-weight: 600; color: var(--text-tertiary);
+      margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .cash-converted { font-size: 11px; color: var(--text-tertiary); margin-top: 5px; min-height: 16px; }
+
+    .cash-total {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      padding: 10px 14px; background: var(--bg-secondary);
+      border-radius: var(--radius-md); margin-top: 4px;
+    }
+    .cash-total-label { font-size: 13px; color: var(--text-secondary); }
+    .cash-total-val   { font-size: 15px; font-weight: 600; color: var(--text); }
+    .cash-total-break { font-size: 12px; color: var(--text-tertiary); }
+
+    .fx-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    @media (max-width: 640px) { .fx-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .fx-card { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 10px 12px; }
+    .fx-pair {
+      font-size: 11px; font-weight: 600; color: var(--text-tertiary);
+      margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .fx-same { font-size: 14px; font-weight: 600; color: var(--text-tertiary); padding: 5px 0; }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+    @media (max-width: 640px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
+
+    .metric { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 12px 14px; }
+    .metric-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
+    .metric-value { font-size: 20px; font-weight: 600; color: var(--text); }
+    .metric-value.danger  { color: var(--text-danger); }
+    .metric-value.success { color: var(--text-success); }
+    .metric-value.warn    { color: var(--text-warning); }
+
+    .fe-bar-bg {
+      height: 8px; background: var(--bg-secondary);
+      border-radius: 4px; overflow: hidden;
+      margin-top: 8px; margin-bottom: 6px;
+    }
+    .fe-bar-fill { height: 100%; border-radius: 4px; transition: width 0.25s, background 0.25s; }
+    .fe-bar-note { font-size: 12px; color: var(--text-tertiary); }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1060px; }
+    th {
+      font-size: 11px; font-weight: 600; color: var(--text-tertiary);
+      text-align: left; padding: 7px 8px;
+      border-bottom: 0.5px solid var(--border);
+      white-space: nowrap; background: var(--bg-secondary);
+    }
+    td { padding: 7px 8px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--bg-secondary); }
+
+    input[type=text], input[type=number], select {
+      width: 100%; padding: 6px 8px;
+      border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-sm);
+      font-size: 13px; background: var(--bg); color: var(--text);
+      outline: none; font-family: inherit;
+    }
+    input[type=text]:focus, input[type=number]:focus, select:focus {
+      border-color: #378add;
+      box-shadow: 0 0 0 2px rgba(55,138,221,0.15);
+    }
+    input[type=number]                             { -moz-appearance: textfield; }
+    input[type=number]::-webkit-inner-spin-button  { -webkit-appearance: none; }
+
+    .cash-inp, .fx-inp {
+      width: 100%; padding: 6px 8px;
+      border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 500;
+      background: var(--bg); color: var(--text);
+      outline: none; font-family: inherit;
+      -moz-appearance: textfield;
+    }
+    .cash-inp::-webkit-inner-spin-button,
+    .fx-inp::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .cash-inp:focus, .fx-inp:focus {
+      border-color: #378add;
+      box-shadow: 0 0 0 2px rgba(55,138,221,0.15);
+    }
+
+    select.base-sel { width: auto; padding: 8px 10px; font-size: 14px; }
+
+    .computed { font-size: 13px; color: var(--text); white-space: nowrap; }
+    .pnl-pos  { color: var(--text-success); }
+    .pnl-neg  { color: var(--text-danger); }
+    .pnl-zero { color: var(--text-secondary); }
+    .tag-conv { font-size: 11px; color: var(--text-tertiary); display: block; margin-top: 2px; }
+
+    .btn-add {
+      margin-top: 12px; padding: 8px 16px;
+      border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-md);
+      background: var(--bg); color: var(--text);
+      font-size: 13px; cursor: pointer; font-family: inherit;
+      transition: background 0.15s;
+    }
+    .btn-add:hover { background: var(--bg-secondary); }
+
+    .btn-del {
+      width: 28px; height: 28px; border: none;
+      background: transparent; color: var(--text-tertiary);
+      cursor: pointer; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-sm); transition: background 0.15s;
+    }
+    .btn-del:hover { background: var(--bg-danger); color: var(--text-danger); }
+
+    .row-count { font-size: 12px; color: var(--text-tertiary); margin-top: 6px; }
+
+    .footer {
+      margin-top: 3rem; padding-top: 1.5rem;
+      border-top: 0.5px solid var(--border);
+      font-size: 12px; color: var(--text-tertiary);
+      text-align: center; line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>CGSI CFD Margin Calculator</h1>
+    <p>Contract for Difference (CGSI Singapore) · Initial margin · Free equity · GLV</p>
+    <span class="badge">Multi-currency · Up to 10 positions</span>
+  </div>
+
+  <!-- Currency selectors -->
+  <div class="two-col">
+    <div class="panel">
+      <div class="panel-label">FX base currency</div>
+      <div class="panel-row">
+        <label>FX rates expressed as X →</label>
+        <select id="fx-base" class="base-sel" onchange="renderFxGrid();calc()">
+          <option>MYR</option><option>SGD</option><option>USD</option><option>HKD</option>
+        </select>
+      </div>
+      <div class="panel-hint">Used for all internal currency conversions</div>
+    </div>
+    <div class="panel">
+      <div class="panel-label">Account summary currency</div>
+      <div class="panel-row">
+        <label>Display GLV / IM / FE in</label>
+        <select id="sum-ccy" class="base-sel" onchange="calc()">
+          <option>MYR</option><option>SGD</option><option>USD</option><option>HKD</option>
+        </select>
+      </div>
+      <div class="panel-hint">Independent of FX base — converts totals for display only</div>
+    </div>
+  </div>
+
+  <!-- Cash deposited -->
+  <div class="card">
+    <div class="section-label">Cash deposited</div>
+    <div class="cash-grid" id="cash-grid"></div>
+    <div class="cash-total">
+      <span class="cash-total-label">Total cash (FX base)</span>
+      <span class="cash-total-val"   id="cash-total-base">—</span>
+      <span class="cash-total-break" id="cash-total-break"></span>
+      <span style="margin-left:16px;font-size:13px;color:var(--text-secondary)">= Summary CCY:</span>
+      <span class="cash-total-val"   id="cash-total-sum">—</span>
+    </div>
+  </div>
+
+  <!-- FX rates -->
+  <div class="card">
+    <div class="section-label">FX rates (to FX base currency)</div>
+    <div class="fx-grid" id="fx-grid"></div>
+  </div>
+
+  <!-- Account summary -->
+  <div class="card">
+    <div class="section-label" id="summary-label">Account summary</div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">GLV</div>
+        <div class="metric-value" id="m-glv">—</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Total IM</div>
+        <div class="metric-value" id="m-im">—</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Free equity (FE)</div>
+        <div class="metric-value" id="m-fe">—</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Unused cash</div>
+        <div class="metric-value" id="m-unused">—</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Total unrealised P&amp;L</div>
+        <div class="metric-value" id="m-pnl">—</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Margin utilisation</div>
+        <div class="metric-value" id="m-util">—</div>
+      </div>
+    </div>
+    <div class="section-label" style="margin-top:1rem">Free equity buffer</div>
+    <div class="fe-bar-bg">
+      <div class="fe-bar-fill" id="fe-bar" style="width:100%;background:var(--bg-success)"></div>
+    </div>
+    <div class="fe-bar-note" id="fe-note">No positions — FE equals full cash deposited</div>
+  </div>
+
+  <!-- Positions -->
+  <div class="card">
+    <div class="section-label">Positions (up to 10)</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>CCY</th>
+            <th>FX rate</th>
+            <th>Direction</th>
+            <th>Entry price</th>
+            <th>Current price</th>
+            <th>Quantity</th>
+            <th>Margin %</th>
+            <th>Notional (pos. CCY)</th>
+            <th>IM (pos. CCY)</th>
+            <th>IM (sum. CCY)</th>
+            <th>P&amp;L (pos. CCY)</th>
+            <th id="pnl-sum-th">P&amp;L (sum. CCY)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <button class="btn-add" onclick="addRow()" id="btn-add">+ Add position</button>
+    <div class="row-count" id="row-count"></div>
+  </div>
+
+  <div class="footer">
+    CGSI CFD Margin Calculator &nbsp;·&nbsp; For reference only. Not financial advice.<br>
+    GLV = Unused Cash + Total IM + Unrealised P&amp;L &nbsp;|&nbsp; FE = GLV − Total IM &nbsp;|&nbsp; IM = Entry × Qty × Margin %
+  </div>
+
+</div>
+<script>
+  const CCYS = ['MYR','SGD','USD','HKD'];
+
+  const DEFAULT_FX = {
+    MYR: { MYR:1,      SGD:3.07,   USD:3.92,   HKD:0.50   },
+    SGD: { MYR:0.3257, SGD:1,      USD:1.2769, HKD:0.1629 },
+    USD: { MYR:0.2551, SGD:0.7832, USD:1,      HKD:0.1276 },
+    HKD: { MYR:2.00,   SGD:6.14,   USD:7.84,   HKD:1      }
+  };
+
+  let rows = [], nextId = 0;
+  const cashValues = { MYR:0, SGD:0, USD:0, HKD:0 };
+
+  function getFxBase() { return document.getElementById('fx-base').value; }
+  function getSumCcy() { return document.getElementById('sum-ccy').value; }
+  function fxId(from, to) { return `fx_${from}_${to}`; }
+
+  function getFxRate(from, to) {
+    if (from === to) return 1;
+    const base = getFxBase();
+    if (to === base) {
+      const el = document.getElementById(fxId(from, base));
+      return el ? (parseFloat(el.value) || 1) : 1;
+    }
+    if (from === base) {
+      const el = document.getElementById(fxId(to, base));
+      return 1 / (el ? (parseFloat(el.value) || 1) : 1);
+    }
+    return getFxRate(from, base) / getFxRate(to, base);
+  }
+
+  function renderCashGrid() {
+    const grid = document.getElementById('cash-grid');
+    grid.innerHTML = '';
+    CCYS.forEach(ccy => {
+      const card = document.createElement('div');
+      card.className = 'cash-card';
+      card.innerHTML = `
+        <div class="cash-card-label">${ccy}</div>
+        <input type="number" class="cash-inp" id="cash_${ccy}"
+          value="${cashValues[ccy]||0}" min="0" step="100" placeholder="0"
+          oninput="cashValues['${ccy}']=parseFloat(this.value)||0;calc()">
+        <div class="cash-converted" id="cash-conv-${ccy}"></div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function renderFxGrid() {
+    const base = getFxBase();
+    const prev = {};
+    CCYS.forEach(ccy => {
+      if (ccy === base) return;
+      const el = document.getElementById(fxId(ccy, base));
+      if (el) prev[fxId(ccy, base)] = el.value;
+    });
+    const grid = document.getElementById('fx-grid');
+    grid.innerHTML = '';
+    CCYS.forEach(ccy => {
+      const card = document.createElement('div');
+      card.className = 'fx-card';
+      if (ccy === base) {
+        card.innerHTML = `<div class="fx-pair">${ccy} → ${base}</div><div class="fx-same">1.0000</div>`;
+      } else {
+        const key    = fxId(ccy, base);
+        const defVal = DEFAULT_FX[base]?.[ccy] != null ? DEFAULT_FX[base][ccy].toFixed(4) : '1.0000';
+        card.innerHTML = `
+          <div class="fx-pair">${ccy} → ${base}</div>
+          <input type="number" class="fx-inp" id="${key}"
+            value="${prev[key] || defVal}" min="0" step="0.0001" oninput="calc()">
+        `;
+      }
+      grid.appendChild(card);
+    });
+  }
+
+  function addRow() {
+    if (rows.length >= 10) return;
+    const id = nextId++;
+    rows.push({ id, ticker:'', ccy:'USD', dir:'Long', entry:'', current:'', qty:'', mrate:'10' });
+    renderTable();
+    calc();
+  }
+
+  function removeRow(id) {
+    rows = rows.filter(r => r.id !== id);
+    renderTable();
+    calc();
+  }
+
+  function getVal(id, field) {
+    const el = document.getElementById(`${field}_${id}`);
+    return el ? el.value : '';
+  }
+
+  function updateField(id, field, val) {
+    const r = rows.find(r => r.id === id);
+    if (r) r[field] = val;
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('tbody');
+    tbody.innerHTML = '';
+    rows.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.id = 'row_' + r.id;
+      const ccyOpts = CCYS.map(c => `<option${c===r.ccy?' selected':''}>${c}</option>`).join('');
+      tr.innerHTML = `
+        <td><input type="text" id="ticker_${r.id}" value="${r.ticker}" placeholder="e.g. TSLA"
+          oninput="updateField(${r.id},'ticker',this.value)"></td>
+        <td style="width:80px">
+          <select id="ccy_${r.id}" onchange="updateField(${r.id},'ccy',this.value);calc()">${ccyOpts}</select>
+        </td>
+        <td class="computed" id="fxshow_${r.id}" style="color:var(--text-secondary)">—</td>
+        <td style="width:90px">
+          <select id="dir_${r.id}" onchange="updateField(${r.id},'dir',this.value);calc()">
+            <option${r.dir==='Long'?' selected':''}>Long</option>
+            <option${r.dir==='Short'?' selected':''}>Short</option>
+          </select>
+        </td>
+        <td style="width:100px">
+          <input type="number" id="entry_${r.id}" value="${r.entry}" placeholder="0.00" min="0" step="0.01"
+            oninput="updateField(${r.id},'entry',this.value);calc()">
+        </td>
+        <td style="width:110px">
+          <input type="number" id="current_${r.id}" value="${r.current}" placeholder="0.00" min="0" step="0.01"
+            oninput="updateField(${r.id},'current',this.value);calc()">
+        </td>
+        <td style="width:80px">
+          <input type="number" id="qty_${r.id}" value="${r.qty}" placeholder="0" min="1" step="1"
+            oninput="updateField(${r.id},'qty',this.value);calc()">
+        </td>
+        <td style="width:80px">
+          <input type="number" id="mrate_${r.id}" value="${r.mrate}" placeholder="10" min="0" max="100" step="0.5"
+            oninput="updateField(${r.id},'mrate',this.value);calc()">
+        </td>
+        <td class="computed" id="notional_${r.id}">—</td>
+        <td class="computed" id="im_pos_${r.id}">—</td>
+        <td class="computed" id="im_sum_${r.id}">—</td>
+        <td class="computed" id="pnl_pos_${r.id}">—</td>
+        <td class="computed" id="pnl_sum_${r.id}">—</td>
+        <td><button class="btn-del" onclick="removeRow(${r.id})" title="Remove">×</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+    document.getElementById('btn-add').style.display = rows.length >= 10 ? 'none' : 'inline-block';
+    document.getElementById('row-count').textContent = rows.length > 0 ? `${rows.length} / 10 positions` : '';
+  }
+
+  function fmt(n, dp = 2) {
+    if (isNaN(n) || !isFinite(n)) return '—';
+    return n.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  }
+
+  function pnlClass(v) {
+    return 'computed ' + (v > 0 ? 'pnl-pos' : v < 0 ? 'pnl-neg' : 'pnl-zero');
+  }
+
+  function calc() {
+    const base   = getFxBase();
+    const sumCcy = getSumCcy();
+
+    document.getElementById('summary-label').textContent = `Account summary (${sumCcy})`;
+    const pnlSumTh = document.getElementById('pnl-sum-th');
+    if (pnlSumTh) pnlSumTh.textContent = `P&L (${sumCcy})`;
+
+    // Cash totals
+    let totalCashBase = 0;
+    const cashParts  = [];
+    CCYS.forEach(ccy => {
+      const amt    = cashValues[ccy] || 0;
+      const fx     = getFxRate(ccy, base);
+      const inBase = amt * fx;
+      totalCashBase += inBase;
+      const convEl = document.getElementById('cash-conv-' + ccy);
+      if (convEl) convEl.textContent = (amt > 0 && ccy !== base) ? `= ${base} ${fmt(inBase)} @ ${fmt(fx,4)}` : '';
+      if (amt > 0) cashParts.push(`${ccy} ${fmt(amt,0)}`);
+    });
+    const cashInSum = totalCashBase * getFxRate(base, sumCcy);
+    document.getElementById('cash-total-base').textContent  = base   + ' ' + fmt(totalCashBase);
+    document.getElementById('cash-total-break').textContent = cashParts.length > 1 ? '( ' + cashParts.join(' + ') + ' )' : '';
+    document.getElementById('cash-total-sum').textContent   = sumCcy + ' ' + fmt(cashInSum);
+
+    // Positions
+    let totalIM_base = 0, totalPnL_base = 0;
+    const rowData    = [];
+
+    rows.forEach(r => {
+      const posCcy   = getVal(r.id,'ccy')     || r.ccy;
+      const entry    = parseFloat(getVal(r.id,'entry'));
+      const current  = parseFloat(getVal(r.id,'current'));
+      const qty      = parseFloat(getVal(r.id,'qty'));
+      const mrate    = parseFloat(getVal(r.id,'mrate')) / 100;
+      const dir      = getVal(r.id,'dir')     || r.dir;
+      const fxToBase = getFxRate(posCcy, base);
+      const fxToSum  = getFxRate(posCcy, sumCcy);
+
+      const fxEl = document.getElementById('fxshow_' + r.id);
+      if (fxEl) fxEl.textContent = posCcy === base ? '1.0000' : fmt(fxToBase, 4);
+
+      const valid      = !isNaN(entry) && !isNaN(qty) && !isNaN(mrate) && entry > 0 && qty > 0;
+      const hasCurrent = !isNaN(current) && current > 0;
+
+      const notional = valid ? (hasCurrent ? current * qty : entry * qty) : NaN;
+      const im_pos   = valid ? entry * qty * mrate : NaN;
+      const im_base  = valid ? im_pos * fxToBase   : NaN;
+      const im_sum   = valid ? im_pos * fxToSum    : NaN;
+      let pnl_pos = NaN, pnl_base = NaN, pnl_sum = NaN;
+      if (valid && hasCurrent) {
+        pnl_pos  = dir === 'Long' ? (current - entry) * qty : (entry - current) * qty;
+        pnl_base = pnl_pos * fxToBase;
+        pnl_sum  = pnl_pos * fxToSum;
+      }
+
+      if (!isNaN(im_base))  totalIM_base  += im_base;
+      if (!isNaN(pnl_base)) totalPnL_base += pnl_base;
+      rowData.push({ id:r.id, posCcy, fxToBase, fxToSum, notional, im_pos, im_sum, pnl_pos, pnl_sum, valid, hasCurrent });
+    });
+
+    // Summary metrics in sumCcy
+    const fxBaseToSum    = getFxRate(base, sumCcy);
+    const totalIM_sum    = totalIM_base   * fxBaseToSum;
+    const totalPnL_sum   = totalPnL_base  * fxBaseToSum;
+    const unusedCash_sum = (totalCashBase - totalIM_base) * fxBaseToSum;
+    const glv_sum        = unusedCash_sum + totalIM_sum + totalPnL_sum;
+    const fe_sum         = glv_sum - totalIM_sum;
+
+    document.getElementById('m-glv').textContent    = sumCcy + ' ' + fmt(glv_sum);
+    document.getElementById('m-im').textContent     = sumCcy + ' ' + fmt(totalIM_sum);
+    document.getElementById('m-unused').textContent = sumCcy + ' ' + fmt(unusedCash_sum);
+
+    const feEl = document.getElementById('m-fe');
+    feEl.textContent = sumCcy + ' ' + fmt(fe_sum);
+    feEl.className   = 'metric-value' + (fe_sum < 0 ? ' danger' : fe_sum < totalIM_sum * 0.2 && totalIM_sum > 0 ? ' warn' : '');
+
+    const pnlEl = document.getElementById('m-pnl');
+    pnlEl.textContent = (totalPnL_sum >= 0 ? '+' : '') + sumCcy + ' ' + fmt(totalPnL_sum);
+    pnlEl.className   = 'metric-value' + (totalPnL_sum > 0 ? ' success' : totalPnL_sum < 0 ? ' danger' : '');
+
+    const util   = totalCashBase > 0 && totalIM_base > 0 ? (totalIM_base / totalCashBase) * 100 : 0;
+    const utilEl = document.getElementById('m-util');
+    utilEl.textContent = fmt(util, 1) + '%';
+    utilEl.className   = 'metric-value' + (util > 90 ? ' danger' : util > 70 ? ' warn' : '');
+
+    const pct = cashInSum > 0 ? Math.max(0, Math.min(100, (fe_sum / cashInSum) * 100)) : 100;
+    const bar = document.getElementById('fe-bar');
+    bar.style.width      = pct + '%';
+    bar.style.background = fe_sum < 0 ? 'var(--bg-danger)' : pct < 20 ? 'var(--bg-warning)' : 'var(--bg-success)';
+
+    const noteEl = document.getElementById('fe-note');
+    noteEl.textContent = rows.length === 0
+      ? 'No positions — FE equals full cash deposited'
+      : fe_sum < 0
+        ? 'Margin call triggered — FE is negative'
+        : `FE is ${fmt(pct,1)}% of total cash deposited`;
+
+    // Row cells
+    rowData.forEach(r => {
+      const notionalEl = document.getElementById('notional_' + r.id);
+      const imPosEl    = document.getElementById('im_pos_'   + r.id);
+      const imSumEl    = document.getElementById('im_sum_'   + r.id);
+      const pnlPosEl   = document.getElementById('pnl_pos_'  + r.id);
+      const pnlSumEl   = document.getElementById('pnl_sum_'  + r.id);
+
+      if (notionalEl) notionalEl.textContent = !isNaN(r.notional) ? r.posCcy + ' ' + fmt(r.notional) : '—';
+      if (imPosEl)    imPosEl.textContent    = !isNaN(r.im_pos)   ? r.posCcy + ' ' + fmt(r.im_pos)   : '—';
+      if (imSumEl) {
+        if (!isNaN(r.im_sum)) {
+          imSumEl.innerHTML = sumCcy + ' ' + fmt(r.im_sum) +
+            (r.posCcy !== sumCcy ? `<span class="tag-conv">@ ${fmt(r.fxToSum,4)}</span>` : '');
+        } else { imSumEl.textContent = '—'; }
+      }
+      if (pnlPosEl) {
+        if (!isNaN(r.pnl_pos)) {
+          pnlPosEl.textContent = (r.pnl_pos >= 0 ? '+' : '') + r.posCcy + ' ' + fmt(r.pnl_pos);
+          pnlPosEl.className   = pnlClass(r.pnl_pos);
+        } else { pnlPosEl.textContent = '—'; pnlPosEl.className = 'computed pnl-zero'; }
+      }
+      if (pnlSumEl) {
+        if (!isNaN(r.pnl_sum)) {
+          pnlSumEl.textContent = (r.pnl_sum >= 0 ? '+' : '') + sumCcy + ' ' + fmt(r.pnl_sum);
+          pnlSumEl.className   = pnlClass(r.pnl_sum);
+        } else { pnlSumEl.textContent = '—'; pnlSumEl.className = 'computed pnl-zero'; }
+      }
+    });
+  }
+
+  // Init
+  renderCashGrid();
+  renderFxGrid();
+  calc();
+  addRow();
+</script>
+</body>
+</html>
