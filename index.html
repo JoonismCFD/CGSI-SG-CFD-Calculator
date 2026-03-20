@@ -133,7 +133,6 @@
       gap: 10px; margin-bottom: 1.25rem;
     }
     @media (max-width: 900px) { .metrics { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width: 480px) { .metrics { grid-template-columns: 1fr; } }
 
     .metric { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 12px 14px; }
     .metric-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
@@ -214,6 +213,100 @@
 
     .row-count { font-size: 12px; color: var(--text-tertiary); margin-top: 6px; }
 
+    /* ── Financing section ─────────────────────────────── */
+    .fin-card {
+      background: var(--bg); border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+      border-top: 3px solid #378add;
+    }
+
+    .fin-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 12px; align-items: end; margin-bottom: 1.25rem;
+    }
+    @media (max-width: 860px) { .fin-top { grid-template-columns: 1fr 1fr; } }
+
+    .fin-field { display: flex; flex-direction: column; gap: 5px; }
+    .fin-field label { font-size: 12px; font-weight: 500; color: var(--text-secondary); }
+    .fin-field input, .fin-field select {
+      padding: 8px 10px;
+      border: 0.5px solid var(--border-md); border-radius: var(--radius-md);
+      font-size: 14px; background: var(--bg); color: var(--text);
+      outline: none; font-family: inherit; -moz-appearance: textfield;
+    }
+    .fin-field input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .fin-field input:focus, .fin-field select:focus {
+      border-color: #378add; box-shadow: 0 0 0 2px rgba(55,138,221,0.15);
+    }
+
+    .fin-rates {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 1.25rem;
+    }
+
+    .fin-rate-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md); padding: 12px 14px;
+    }
+    .fin-rate-label {
+      font-size: 11px; font-weight: 600; color: var(--text-tertiary);
+      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;
+    }
+    .fin-rate-row { display: flex; align-items: center; gap: 8px; }
+    .fin-rate-row label { font-size: 13px; color: var(--text-secondary); white-space: nowrap; min-width: 90px; }
+    .fin-rate-row input {
+      width: 120px; padding: 6px 8px;
+      border: 0.5px solid var(--border-md); border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 500;
+      background: var(--bg); color: var(--text);
+      outline: none; font-family: inherit; -moz-appearance: textfield;
+    }
+    .fin-rate-row input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .fin-rate-row input:focus {
+      border-color: #378add; box-shadow: 0 0 0 2px rgba(55,138,221,0.15);
+    }
+    .fin-rate-hint { font-size: 11px; color: var(--text-tertiary); margin-top: 5px; }
+
+    .fin-results {
+      display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px; margin-top: 1rem;
+    }
+    @media (max-width: 640px) { .fin-results { grid-template-columns: repeat(2,1fr); } }
+
+    .fin-result-card {
+      background: var(--bg-info);
+      border-radius: var(--radius-md); padding: 12px 14px;
+      border: 0.5px solid rgba(55,138,221,0.2);
+    }
+    .fin-result-label { font-size: 12px; color: var(--text-info); margin-bottom: 6px; font-weight: 500; }
+    .fin-result-val {
+      font-size: 18px; font-weight: 600; color: var(--text-info);
+    }
+    .fin-result-sub { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+    .fin-formula {
+      font-size: 11px; color: var(--text-tertiary);
+      background: var(--bg-secondary); border-radius: var(--radius-md);
+      padding: 8px 12px; margin-top: 1rem; line-height: 1.6;
+    }
+    .fin-no-pos {
+      text-align: center; padding: 2rem;
+      font-size: 14px; color: var(--text-tertiary);
+    }
+
+    .divider-label {
+      display: flex; align-items: center; gap: 12px;
+      margin: 2rem 0 1.25rem;
+    }
+    .divider-label span {
+      font-size: 13px; font-weight: 500; color: var(--text-secondary);
+      white-space: nowrap;
+    }
+    .divider-label::before, .divider-label::after {
+      content: ''; flex: 1; height: 0.5px; background: var(--border);
+    }
+
     .footer {
       margin-top: 3rem; padding-top: 1.5rem;
       border-top: 0.5px solid var(--border);
@@ -278,44 +371,20 @@
   <div class="card">
     <div class="section-label" id="summary-label">Account summary</div>
     <div class="metrics">
-      <div class="metric">
-        <div class="metric-label">GLV</div>
-        <div class="metric-value" id="m-glv">—</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Total IM (MTM)</div>
-        <div class="metric-value" id="m-im">—</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Free equity (FE)</div>
-        <div class="metric-value" id="m-fe">—</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Unused cash</div>
-        <div class="metric-value" id="m-unused">—</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Total market value</div>
-        <div class="metric-value info" id="m-tmv">—</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Total unrealised P&amp;L</div>
-        <div class="metric-value" id="m-pnl">—</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Margin utilisation</div>
-        <div class="metric-value" id="m-util">—</div>
-      </div>
+      <div class="metric"><div class="metric-label">GLV</div><div class="metric-value" id="m-glv">—</div></div>
+      <div class="metric"><div class="metric-label">Total IM (MTM)</div><div class="metric-value" id="m-im">—</div></div>
+      <div class="metric"><div class="metric-label">Free equity (FE)</div><div class="metric-value" id="m-fe">—</div></div>
+      <div class="metric"><div class="metric-label">Unused cash</div><div class="metric-value" id="m-unused">—</div></div>
+      <div class="metric"><div class="metric-label">Total market value</div><div class="metric-value info" id="m-tmv">—</div></div>
+      <div class="metric"><div class="metric-label">Total unrealised P&amp;L</div><div class="metric-value" id="m-pnl">—</div></div>
+      <div class="metric"><div class="metric-label">Margin utilisation</div><div class="metric-value" id="m-util">—</div></div>
     </div>
-
     <div class="section-label" style="margin-top:1rem">Free equity buffer</div>
-    <div class="fe-bar-bg">
-      <div class="fe-bar-fill" id="fe-bar" style="width:100%;background:var(--bg-success)"></div>
-    </div>
+    <div class="fe-bar-bg"><div class="fe-bar-fill" id="fe-bar" style="width:100%;background:var(--bg-success)"></div></div>
     <div class="fe-bar-note" id="fe-note">No positions — FE equals full cash deposited</div>
   </div>
 
-  <!-- Positions -->
+  <!-- Positions table -->
   <div class="card">
     <div class="section-label">Positions (up to 10)</div>
     <div class="table-wrap">
@@ -330,6 +399,8 @@
             <th>Current price</th>
             <th>Quantity</th>
             <th>Margin %</th>
+            <th>Long fin. %</th>
+            <th>Short fin. %</th>
             <th>Mkt val (pos. CCY)</th>
             <th id="mv-sum-th">Mkt val (sum. CCY)</th>
             <th>IM (pos. CCY)</th>
@@ -346,9 +417,102 @@
     <div class="row-count" id="row-count"></div>
   </div>
 
+  <!-- Financing cost calculator -->
+  <div class="divider-label"><span>Financing cost calculator</span></div>
+
+  <div class="fin-card">
+    <div class="section-label">Financing cost calculator</div>
+
+    <div id="fin-no-pos" class="fin-no-pos">Add at least one position above to use this calculator.</div>
+
+    <div id="fin-body" style="display:none">
+      <div class="fin-top">
+        <div class="fin-field">
+          <label>Position</label>
+          <select id="fin-pos-select" onchange="calcFin()"></select>
+        </div>
+        <div class="fin-field">
+          <label>Direction</label>
+          <div id="fin-dir-display" style="padding:8px 10px;border:0.5px solid var(--border-md);border-radius:var(--radius-md);font-size:14px;color:var(--text-secondary);background:var(--bg-secondary)">—</div>
+        </div>
+        <div class="fin-field">
+          <label>Market value (pos. CCY)</label>
+          <div id="fin-mv-display" style="padding:8px 10px;border:0.5px solid var(--border-md);border-radius:var(--radius-md);font-size:14px;font-weight:600;color:var(--text);background:var(--bg-secondary)">—</div>
+        </div>
+        <div class="fin-field">
+          <label>Months</label>
+          <input type="number" id="fin-months" value="1" min="0" step="1" oninput="calcFin()">
+        </div>
+        <div class="fin-field">
+          <label>Days</label>
+          <input type="number" id="fin-days" value="0" min="0" step="1" oninput="calcFin()">
+        </div>
+      </div>
+
+      <div class="fin-rates">
+        <div class="fin-rate-card">
+          <div class="fin-rate-label">Long financing rate</div>
+          <div class="fin-rate-row">
+            <label>Annual rate %</label>
+            <input type="number" id="fin-long-rate" value="3.50" min="0" step="0.01" oninput="calcFin()">
+            <span style="font-size:13px;color:var(--text-tertiary)">% p.a.</span>
+          </div>
+          <div class="fin-rate-hint">Applied when direction is Long</div>
+        </div>
+        <div class="fin-rate-card">
+          <div class="fin-rate-label">Short financing rate</div>
+          <div class="fin-rate-row">
+            <label>Annual rate %</label>
+            <input type="number" id="fin-short-rate" value="2.00" min="0" step="0.01" oninput="calcFin()">
+            <span style="font-size:13px;color:var(--text-tertiary)">% p.a.</span>
+          </div>
+          <div class="fin-rate-hint">Applied when direction is Short</div>
+        </div>
+      </div>
+
+      <div class="fin-results" id="fin-results">
+        <div class="fin-result-card">
+          <div class="fin-result-label">Daily cost (pos. CCY)</div>
+          <div class="fin-result-val" id="fin-daily-pos">—</div>
+          <div class="fin-result-sub">per calendar day</div>
+        </div>
+        <div class="fin-result-card">
+          <div class="fin-result-label">Monthly cost (pos. CCY)</div>
+          <div class="fin-result-val" id="fin-monthly-pos">—</div>
+          <div class="fin-result-sub">30 days</div>
+        </div>
+        <div class="fin-result-card">
+          <div class="fin-result-label">Total for period (pos. CCY)</div>
+          <div class="fin-result-val" id="fin-total-pos">—</div>
+          <div class="fin-result-sub" id="fin-period-label-pos">—</div>
+        </div>
+        <div class="fin-result-card">
+          <div class="fin-result-label" id="fin-daily-sum-label">Daily cost (sum. CCY)</div>
+          <div class="fin-result-val" id="fin-daily-sum">—</div>
+          <div class="fin-result-sub">per calendar day</div>
+        </div>
+        <div class="fin-result-card">
+          <div class="fin-result-label" id="fin-monthly-sum-label">Monthly cost (sum. CCY)</div>
+          <div class="fin-result-val" id="fin-monthly-sum">—</div>
+          <div class="fin-result-sub">30 days</div>
+        </div>
+        <div class="fin-result-card">
+          <div class="fin-result-label" id="fin-total-sum-label">Total for period (sum. CCY)</div>
+          <div class="fin-result-val" id="fin-total-sum">—</div>
+          <div class="fin-result-sub" id="fin-period-label-sum">—</div>
+        </div>
+      </div>
+
+      <div class="fin-formula" id="fin-formula">
+        Formula: Financing cost per day = Financing rate % × Market value ÷ 360
+      </div>
+    </div>
+  </div>
+
   <div class="footer">
-    CGSI CFD Margin Calculator &nbsp;·&nbsp; For reference only. Not financial advice.<br>
-    GLV = Unused Cash + Total IM + Unrealised P&amp;L &nbsp;|&nbsp; FE = GLV − Total IM &nbsp;|&nbsp; IM = Current Price × Qty × Margin % (MTM)
+    CGSI CFD Margin Calculator (v1.2) &nbsp;·&nbsp; For reference only. Not financial advice.<br>
+    GLV = Unused Cash + Total IM + Unrealised P&amp;L &nbsp;|&nbsp; FE = GLV − Total IM &nbsp;|&nbsp;
+    IM = Current Price × Qty × Margin % (MTM) &nbsp;|&nbsp; Financing = Rate % × Mkt Val ÷ 360
   </div>
 
 </div>
@@ -364,6 +528,9 @@
 
   let rows = [], nextId = 0;
   const cashValues = { MYR:0, SGD:0, USD:0, HKD:0 };
+
+  // Store latest computed row data for financing calc
+  let latestRowData = [];
 
   function getFxBase() { return document.getElementById('fx-base').value; }
   function getSumCcy() { return document.getElementById('sum-ccy').value; }
@@ -431,7 +598,7 @@
   function addRow() {
     if (rows.length >= 10) return;
     const id = nextId++;
-    rows.push({ id, ticker:'', ccy:'USD', dir:'Long', entry:'', current:'', qty:'', mrate:'10' });
+    rows.push({ id, ticker:'', ccy:'USD', dir:'Long', entry:'', current:'', qty:'', mrate:'10', longFin:'3.50', shortFin:'2.00' });
     renderTable();
     calc();
   }
@@ -461,7 +628,7 @@
       const ccyOpts = CCYS.map(c => `<option${c===r.ccy?' selected':''}>${c}</option>`).join('');
       tr.innerHTML = `
         <td><input type="text" id="ticker_${r.id}" value="${r.ticker}" placeholder="e.g. TSLA"
-          oninput="updateField(${r.id},'ticker',this.value)"></td>
+          oninput="updateField(${r.id},'ticker',this.value);calcFin()"></td>
         <td style="width:78px">
           <select id="ccy_${r.id}" onchange="updateField(${r.id},'ccy',this.value);calc()">${ccyOpts}</select>
         </td>
@@ -488,6 +655,14 @@
           <input type="number" id="mrate_${r.id}" value="${r.mrate}" placeholder="10" min="0" max="100" step="0.5"
             oninput="updateField(${r.id},'mrate',this.value);calc()">
         </td>
+        <td style="width:86px">
+          <input type="number" id="longFin_${r.id}" value="${r.longFin}" placeholder="3.50" min="0" step="0.01"
+            oninput="updateField(${r.id},'longFin',this.value);calcFin()">
+        </td>
+        <td style="width:86px">
+          <input type="number" id="shortFin_${r.id}" value="${r.shortFin}" placeholder="2.00" min="0" step="0.01"
+            oninput="updateField(${r.id},'shortFin',this.value);calcFin()">
+        </td>
         <td class="computed" id="mv_pos_${r.id}">—</td>
         <td class="computed" id="mv_sum_${r.id}">—</td>
         <td class="computed" id="im_pos_${r.id}">—</td>
@@ -511,18 +686,107 @@
     return 'computed ' + (v > 0 ? 'pnl-pos' : v < 0 ? 'pnl-neg' : 'pnl-zero');
   }
 
+  function updateFinDropdown() {
+    const sel = document.getElementById('fin-pos-select');
+    const prevId = sel.value;
+    sel.innerHTML = '';
+    const validRows = latestRowData.filter(r => r.valid);
+    if (validRows.length === 0) {
+      document.getElementById('fin-no-pos').style.display = 'block';
+      document.getElementById('fin-body').style.display   = 'none';
+      return;
+    }
+    document.getElementById('fin-no-pos').style.display = 'none';
+    document.getElementById('fin-body').style.display   = 'block';
+    validRows.forEach(r => {
+      const opt = document.createElement('option');
+      opt.value = r.id;
+      const ticker = (document.getElementById('ticker_' + r.id) || {}).value || `Position ${r.id+1}`;
+      opt.textContent = `${ticker || 'Unnamed'} (${r.posCcy} · ${r.dir})`;
+      if (String(r.id) === String(prevId)) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    calcFin();
+  }
+
+  function calcFin() {
+    const sel = document.getElementById('fin-pos-select');
+    if (!sel || !sel.value) return;
+    const id  = parseInt(sel.value);
+    const rd  = latestRowData.find(r => r.id === id);
+    if (!rd || !rd.valid) return;
+
+    const sumCcy = getSumCcy();
+    const dir    = rd.dir;
+
+    // Display direction and MV
+    const dirDisplay = document.getElementById('fin-dir-display');
+    const mvDisplay  = document.getElementById('fin-mv-display');
+    if (dirDisplay) dirDisplay.textContent = dir;
+    if (mvDisplay)  mvDisplay.textContent  = !isNaN(rd.mv_pos)
+      ? rd.posCcy + ' ' + fmt(rd.mv_pos) : '—';
+
+    // Rates
+    const longRate  = parseFloat(document.getElementById('fin-long-rate').value)  || 0;
+    const shortRate = parseFloat(document.getElementById('fin-short-rate').value) || 0;
+    const rate      = dir === 'Long' ? longRate : shortRate;
+
+    // Period
+    const months   = parseInt(document.getElementById('fin-months').value) || 0;
+    const days     = parseInt(document.getElementById('fin-days').value)   || 0;
+    const totalDays = months * 30 + days;
+
+    const mv = rd.mv_pos;
+    if (isNaN(mv) || mv <= 0) return;
+
+    // Formula: rate% × MV ÷ 360
+    const dailyCost_pos   = (rate / 100) * mv / 360;
+    const monthlyCost_pos = dailyCost_pos * 30;
+    const totalCost_pos   = dailyCost_pos * totalDays;
+
+    // Convert to summary CCY
+    const fxToSum         = getFxRate(rd.posCcy, sumCcy);
+    const dailyCost_sum   = dailyCost_pos   * fxToSum;
+    const monthlyCost_sum = monthlyCost_pos * fxToSum;
+    const totalCost_sum   = totalCost_pos   * fxToSum;
+
+    // Update summary CCY labels
+    document.getElementById('fin-daily-sum-label').textContent   = `Daily cost (${sumCcy})`;
+    document.getElementById('fin-monthly-sum-label').textContent = `Monthly cost (${sumCcy})`;
+    document.getElementById('fin-total-sum-label').textContent   = `Total for period (${sumCcy})`;
+
+    // Results
+    document.getElementById('fin-daily-pos').textContent   = rd.posCcy + ' ' + fmt(dailyCost_pos, 4);
+    document.getElementById('fin-monthly-pos').textContent = rd.posCcy + ' ' + fmt(monthlyCost_pos, 2);
+    document.getElementById('fin-total-pos').textContent   = rd.posCcy + ' ' + fmt(totalCost_pos, 2);
+    document.getElementById('fin-daily-sum').textContent   = sumCcy    + ' ' + fmt(dailyCost_sum, 4);
+    document.getElementById('fin-monthly-sum').textContent = sumCcy    + ' ' + fmt(monthlyCost_sum, 2);
+    document.getElementById('fin-total-sum').textContent   = sumCcy    + ' ' + fmt(totalCost_sum, 2);
+
+    const periodLabel = totalDays > 0
+      ? `${months > 0 ? months + ' month' + (months > 1 ? 's' : '') : ''}${months > 0 && days > 0 ? ' + ' : ''}${days > 0 ? days + ' day' + (days > 1 ? 's' : '') : ''} (${totalDays} days)`
+      : '0 days';
+    document.getElementById('fin-period-label-pos').textContent = periodLabel;
+    document.getElementById('fin-period-label-sum').textContent = periodLabel;
+
+    // Formula display
+    const ticker = (document.getElementById('ticker_' + id) || {}).value || 'Position';
+    document.getElementById('fin-formula').textContent =
+      `Formula: ${rate}% × ${rd.posCcy} ${fmt(mv)} ÷ 360 = ${rd.posCcy} ${fmt(dailyCost_pos, 4)} / day` +
+      (totalDays > 0 ? ` · ${totalDays} days total = ${rd.posCcy} ${fmt(totalCost_pos, 2)}` : '');
+  }
+
   function calc() {
     const base   = getFxBase();
     const sumCcy = getSumCcy();
 
-    // Update dynamic labels
     document.getElementById('summary-label').textContent = `Account summary (${sumCcy})`;
     const mvSumTh  = document.getElementById('mv-sum-th');
     const pnlSumTh = document.getElementById('pnl-sum-th');
     if (mvSumTh)  mvSumTh.textContent  = `Mkt val (${sumCcy})`;
     if (pnlSumTh) pnlSumTh.textContent = `P&L (${sumCcy})`;
 
-    // ── Cash ──────────────────────────────────────────────
+    // Cash
     let totalCashBase = 0;
     const cashParts  = [];
     CCYS.forEach(ccy => {
@@ -541,7 +805,7 @@
       ? '( ' + cashParts.join(' + ') + ' )' : '';
     document.getElementById('cash-total-sum').textContent   = sumCcy + ' ' + fmt(cashInSum);
 
-    // ── Positions ─────────────────────────────────────────
+    // Positions
     let totalIM_base  = 0;
     let totalPnL_base = 0;
     let totalMV_base  = 0;
@@ -563,19 +827,15 @@
       const valid      = !isNaN(entry) && !isNaN(qty) && !isNaN(mrate) && entry > 0 && qty > 0;
       const hasCurrent = !isNaN(current) && current > 0;
 
-      // Market value = current price × qty (pos. CCY)
       const mv_pos  = valid && hasCurrent ? current * qty : (valid ? entry * qty : NaN);
-      const mv_sum  = !isNaN(mv_pos) ? mv_pos * fxToSum : NaN;
+      const mv_sum  = !isNaN(mv_pos) ? mv_pos * fxToSum  : NaN;
       const mv_base = !isNaN(mv_pos) ? mv_pos * fxToBase : NaN;
 
-      // IM (MTM) = current price × qty × margin %
-      // Falls back to entry price if no current price entered
-      const imPrice  = (valid && hasCurrent) ? current : entry;
-      const im_pos   = valid ? imPrice * qty * mrate : NaN;
-      const im_base  = valid ? im_pos * fxToBase     : NaN;
-      const im_sum   = valid ? im_pos * fxToSum      : NaN;
+      const imPrice = (valid && hasCurrent) ? current : entry;
+      const im_pos  = valid ? imPrice * qty * mrate : NaN;
+      const im_base = valid ? im_pos * fxToBase     : NaN;
+      const im_sum  = valid ? im_pos * fxToSum      : NaN;
 
-      // Unrealised P&L
       let pnl_pos = NaN, pnl_base = NaN, pnl_sum = NaN;
       if (valid && hasCurrent) {
         pnl_pos  = dir === 'Long' ? (current - entry) * qty : (entry - current) * qty;
@@ -587,16 +847,14 @@
       if (!isNaN(pnl_base)) totalPnL_base += pnl_base;
       if (!isNaN(mv_base))  totalMV_base  += mv_base;
 
-      rowData.push({
-        id: r.id, posCcy, fxToBase, fxToSum,
-        mv_pos, mv_sum,
-        im_pos, im_sum,
-        pnl_pos, pnl_sum,
-        valid, hasCurrent
-      });
+      rowData.push({ id:r.id, posCcy, fxToBase, fxToSum, dir,
+        mv_pos, mv_sum, im_pos, im_sum, pnl_pos, pnl_sum, valid, hasCurrent });
     });
 
-    // ── Summary metrics (all in sumCcy) ───────────────────
+    // Store for financing calc
+    latestRowData = rowData;
+
+    // Summary metrics
     const fxBaseToSum    = getFxRate(base, sumCcy);
     const totalIM_sum    = totalIM_base   * fxBaseToSum;
     const totalPnL_sum   = totalPnL_base  * fxBaseToSum;
@@ -608,9 +866,7 @@
     document.getElementById('m-glv').textContent    = sumCcy + ' ' + fmt(glv_sum);
     document.getElementById('m-im').textContent     = sumCcy + ' ' + fmt(totalIM_sum);
     document.getElementById('m-unused').textContent = sumCcy + ' ' + fmt(unusedCash_sum);
-
-    const tmvEl = document.getElementById('m-tmv');
-    tmvEl.textContent = rows.length > 0 ? sumCcy + ' ' + fmt(totalMV_sum) : '—';
+    document.getElementById('m-tmv').textContent    = rows.length > 0 ? sumCcy + ' ' + fmt(totalMV_sum) : '—';
 
     const feEl = document.getElementById('m-fe');
     feEl.textContent = sumCcy + ' ' + fmt(fe_sum);
@@ -627,7 +883,6 @@
     utilEl.textContent = fmt(util, 1) + '%';
     utilEl.className   = 'metric-value' + (util > 90 ? ' danger' : util > 70 ? ' warn' : '');
 
-    // FE bar
     const pct = cashInSum > 0 ? Math.max(0, Math.min(100, (fe_sum / cashInSum) * 100)) : 100;
     const bar = document.getElementById('fe-bar');
     bar.style.width      = pct + '%';
@@ -642,7 +897,7 @@
         ? 'Margin call triggered — FE is negative'
         : `FE is ${fmt(pct,1)}% of total cash deposited`;
 
-    // ── Row cells ─────────────────────────────────────────
+    // Row cells
     rowData.forEach(r => {
       const mvPosEl  = document.getElementById('mv_pos_'  + r.id);
       const mvSumEl  = document.getElementById('mv_sum_'  + r.id);
@@ -651,47 +906,36 @@
       const pnlPosEl = document.getElementById('pnl_pos_' + r.id);
       const pnlSumEl = document.getElementById('pnl_sum_' + r.id);
 
-      // Market value (pos. CCY)
       if (mvPosEl) {
         if (!isNaN(r.mv_pos)) {
           mvPosEl.innerHTML = r.posCcy + ' ' + fmt(r.mv_pos) +
             (!r.hasCurrent ? '<span class="mtm-note">using entry price</span>' : '');
         } else { mvPosEl.textContent = '—'; }
       }
-
-      // Market value (sum. CCY)
       if (mvSumEl) {
         if (!isNaN(r.mv_sum)) {
           mvSumEl.innerHTML = sumCcy + ' ' + fmt(r.mv_sum) +
             (r.posCcy !== sumCcy ? `<span class="tag-conv">@ ${fmt(r.fxToSum,4)}</span>` : '');
         } else { mvSumEl.textContent = '—'; }
       }
-
-      // IM (pos. CCY) — MTM
       if (imPosEl) {
         if (!isNaN(r.im_pos)) {
           imPosEl.innerHTML = r.posCcy + ' ' + fmt(r.im_pos) +
             (!r.hasCurrent ? '<span class="mtm-note">using entry price</span>' : '');
         } else { imPosEl.textContent = '—'; }
       }
-
-      // IM (sum. CCY)
       if (imSumEl) {
         if (!isNaN(r.im_sum)) {
           imSumEl.innerHTML = sumCcy + ' ' + fmt(r.im_sum) +
             (r.posCcy !== sumCcy ? `<span class="tag-conv">@ ${fmt(r.fxToSum,4)}</span>` : '');
         } else { imSumEl.textContent = '—'; }
       }
-
-      // P&L (pos. CCY)
       if (pnlPosEl) {
         if (!isNaN(r.pnl_pos)) {
           pnlPosEl.textContent = (r.pnl_pos >= 0 ? '+' : '') + r.posCcy + ' ' + fmt(r.pnl_pos);
           pnlPosEl.className   = pnlClass(r.pnl_pos);
         } else { pnlPosEl.textContent = '—'; pnlPosEl.className = 'computed pnl-zero'; }
       }
-
-      // P&L (sum. CCY)
       if (pnlSumEl) {
         if (!isNaN(r.pnl_sum)) {
           pnlSumEl.textContent = (r.pnl_sum >= 0 ? '+' : '') + sumCcy + ' ' + fmt(r.pnl_sum);
@@ -699,6 +943,9 @@
         } else { pnlSumEl.textContent = '—'; pnlSumEl.className = 'computed pnl-zero'; }
       }
     });
+
+    // Update financing dropdown
+    updateFinDropdown();
   }
 
   // Init
