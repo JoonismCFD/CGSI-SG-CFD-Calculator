@@ -8,13 +8,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:           #ffffff;
-      --bg-secondary: #f5f5f4;
-      --bg-tertiary:  #eeece9;
-      --bg-danger:    #fce8e8;
-      --bg-warning:   #fef3e2;
-      --bg-success:   #eaf3de;
-      --bg-info:      #e6f1fb;
+      --bg:            #ffffff;
+      --bg-secondary:  #f5f5f4;
+      --bg-tertiary:   #eeece9;
+      --bg-danger:     #fce8e8;
+      --bg-warning:    #fef3e2;
+      --bg-success:    #eaf3de;
+      --bg-info:       #e6f1fb;
       --text:          #1a1a18;
       --text-secondary:#5f5e5a;
       --text-tertiary: #888780;
@@ -31,13 +31,13 @@
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg:           #1c1c1a;
-        --bg-secondary: #262624;
-        --bg-tertiary:  #2e2e2b;
-        --bg-danger:    #3a1a1a;
-        --bg-warning:   #3a2a10;
-        --bg-success:   #1a2e0a;
-        --bg-info:      #0c2a44;
+        --bg:            #1c1c1a;
+        --bg-secondary:  #262624;
+        --bg-tertiary:   #2e2e2b;
+        --bg-danger:     #3a1a1a;
+        --bg-warning:    #3a2a10;
+        --bg-success:    #1a2e0a;
+        --bg-info:       #0c2a44;
         --text:          #f0ede8;
         --text-secondary:#b4b2a9;
         --text-tertiary: #888780;
@@ -59,76 +59,49 @@
       min-height: 100vh;
     }
 
-    .page {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
-    }
+    .page { max-width: 1380px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
     .header { margin-bottom: 2rem; }
     .header h1 { font-size: 22px; font-weight: 600; }
     .header p  { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
     .badge {
-      display: inline-block;
-      margin-top: 8px;
-      font-size: 11px;
-      padding: 3px 10px;
-      background: var(--bg-success);
-      color: var(--text-success);
-      border-radius: 20px;
-      font-weight: 500;
+      display: inline-block; margin-top: 8px;
+      font-size: 11px; padding: 3px 10px;
+      background: var(--bg-success); color: var(--text-success);
+      border-radius: 20px; font-weight: 500;
     }
 
     .card {
-      background: var(--bg);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem 1.5rem;
+      background: var(--bg); border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.25rem 1.5rem;
       margin-bottom: 1.25rem;
     }
 
     .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: 12px;
+      font-size: 11px; font-weight: 600; color: var(--text-tertiary);
+      text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px;
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 1.25rem;
-    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
     @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
 
     .panel {
-      background: var(--bg);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1rem 1.25rem;
+      background: var(--bg); border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1rem 1.25rem;
     }
     .panel-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: 10px;
+      font-size: 11px; font-weight: 600; color: var(--text-tertiary);
+      text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px;
     }
     .panel-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .panel-row label { font-size: 13px; color: var(--text-secondary); white-space: nowrap; }
     .panel-hint { font-size: 11px; color: var(--text-tertiary); margin-top: 6px; }
 
     .cash-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-bottom: 12px;
+      display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px; margin-bottom: 12px;
     }
-    @media (max-width: 640px) { .cash-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .cash-grid { grid-template-columns: repeat(2,1fr); } }
 
     .cash-card { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 12px 14px; }
     .cash-card-label {
@@ -147,44 +120,38 @@
     .cash-total-break { font-size: 12px; color: var(--text-tertiary); }
 
     .fx-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
+      display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px;
     }
-    @media (max-width: 640px) { .fx-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .fx-grid { grid-template-columns: repeat(2,1fr); } }
 
     .fx-card { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 10px 12px; }
-    .fx-pair {
-      font-size: 11px; font-weight: 600; color: var(--text-tertiary);
-      margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em;
-    }
+    .fx-pair { font-size: 11px; font-weight: 600; color: var(--text-tertiary); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
     .fx-same { font-size: 14px; font-weight: 600; color: var(--text-tertiary); padding: 5px 0; }
 
     .metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 1.25rem;
+      display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 10px; margin-bottom: 1.25rem;
     }
-    @media (max-width: 640px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 900px) { .metrics { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 480px) { .metrics { grid-template-columns: 1fr; } }
 
     .metric { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 12px 14px; }
     .metric-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
-    .metric-value { font-size: 20px; font-weight: 600; color: var(--text); }
+    .metric-value { font-size: 18px; font-weight: 600; color: var(--text); }
     .metric-value.danger  { color: var(--text-danger); }
     .metric-value.success { color: var(--text-success); }
     .metric-value.warn    { color: var(--text-warning); }
+    .metric-value.info    { color: var(--text-info); }
 
     .fe-bar-bg {
-      height: 8px; background: var(--bg-secondary);
-      border-radius: 4px; overflow: hidden;
-      margin-top: 8px; margin-bottom: 6px;
+      height: 8px; background: var(--bg-secondary); border-radius: 4px;
+      overflow: hidden; margin-top: 8px; margin-bottom: 6px;
     }
     .fe-bar-fill { height: 100%; border-radius: 4px; transition: width 0.25s, background 0.25s; }
     .fe-bar-note { font-size: 12px; color: var(--text-tertiary); }
 
     .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1060px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1200px; }
     th {
       font-size: 11px; font-weight: 600; color: var(--text-tertiary);
       text-align: left; padding: 7px 8px;
@@ -197,34 +164,28 @@
 
     input[type=text], input[type=number], select {
       width: 100%; padding: 6px 8px;
-      border: 0.5px solid var(--border-md);
-      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--border-md); border-radius: var(--radius-sm);
       font-size: 13px; background: var(--bg); color: var(--text);
       outline: none; font-family: inherit;
     }
     input[type=text]:focus, input[type=number]:focus, select:focus {
-      border-color: #378add;
-      box-shadow: 0 0 0 2px rgba(55,138,221,0.15);
+      border-color: #378add; box-shadow: 0 0 0 2px rgba(55,138,221,0.15);
     }
-    input[type=number]                             { -moz-appearance: textfield; }
-    input[type=number]::-webkit-inner-spin-button  { -webkit-appearance: none; }
+    input[type=number]                            { -moz-appearance: textfield; }
+    input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
 
     .cash-inp, .fx-inp {
       width: 100%; padding: 6px 8px;
-      border: 0.5px solid var(--border-md);
-      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--border-md); border-radius: var(--radius-sm);
       font-size: 14px; font-weight: 500;
       background: var(--bg); color: var(--text);
-      outline: none; font-family: inherit;
-      -moz-appearance: textfield;
+      outline: none; font-family: inherit; -moz-appearance: textfield;
     }
     .cash-inp::-webkit-inner-spin-button,
     .fx-inp::-webkit-inner-spin-button { -webkit-appearance: none; }
     .cash-inp:focus, .fx-inp:focus {
-      border-color: #378add;
-      box-shadow: 0 0 0 2px rgba(55,138,221,0.15);
+      border-color: #378add; box-shadow: 0 0 0 2px rgba(55,138,221,0.15);
     }
-
     select.base-sel { width: auto; padding: 8px 10px; font-size: 14px; }
 
     .computed { font-size: 13px; color: var(--text); white-space: nowrap; }
@@ -232,14 +193,13 @@
     .pnl-neg  { color: var(--text-danger); }
     .pnl-zero { color: var(--text-secondary); }
     .tag-conv { font-size: 11px; color: var(--text-tertiary); display: block; margin-top: 2px; }
+    .mtm-note { font-size: 11px; color: var(--text-warning); display: block; margin-top: 2px; }
 
     .btn-add {
       margin-top: 12px; padding: 8px 16px;
-      border: 0.5px solid var(--border-md);
-      border-radius: var(--radius-md);
+      border: 0.5px solid var(--border-md); border-radius: var(--radius-md);
       background: var(--bg); color: var(--text);
-      font-size: 13px; cursor: pointer; font-family: inherit;
-      transition: background 0.15s;
+      font-size: 13px; cursor: pointer; font-family: inherit; transition: background 0.15s;
     }
     .btn-add:hover { background: var(--bg-secondary); }
 
@@ -268,7 +228,7 @@
   <div class="header">
     <h1>CGSI CFD Margin Calculator</h1>
     <p>Contract for Difference (CGSI Singapore) · Initial margin · Free equity · GLV</p>
-    <span class="badge">Multi-currency · Up to 10 positions</span>
+    <span class="badge">Multi-currency · Up to 10 positions · MTM margin</span>
   </div>
 
   <!-- Currency selectors -->
@@ -323,7 +283,7 @@
         <div class="metric-value" id="m-glv">—</div>
       </div>
       <div class="metric">
-        <div class="metric-label">Total IM</div>
+        <div class="metric-label">Total IM (MTM)</div>
         <div class="metric-value" id="m-im">—</div>
       </div>
       <div class="metric">
@@ -335,6 +295,10 @@
         <div class="metric-value" id="m-unused">—</div>
       </div>
       <div class="metric">
+        <div class="metric-label">Total market value</div>
+        <div class="metric-value info" id="m-tmv">—</div>
+      </div>
+      <div class="metric">
         <div class="metric-label">Total unrealised P&amp;L</div>
         <div class="metric-value" id="m-pnl">—</div>
       </div>
@@ -343,6 +307,7 @@
         <div class="metric-value" id="m-util">—</div>
       </div>
     </div>
+
     <div class="section-label" style="margin-top:1rem">Free equity buffer</div>
     <div class="fe-bar-bg">
       <div class="fe-bar-fill" id="fe-bar" style="width:100%;background:var(--bg-success)"></div>
@@ -365,7 +330,8 @@
             <th>Current price</th>
             <th>Quantity</th>
             <th>Margin %</th>
-            <th>Notional (pos. CCY)</th>
+            <th>Mkt val (pos. CCY)</th>
+            <th id="mv-sum-th">Mkt val (sum. CCY)</th>
             <th>IM (pos. CCY)</th>
             <th>IM (sum. CCY)</th>
             <th>P&amp;L (pos. CCY)</th>
@@ -382,7 +348,7 @@
 
   <div class="footer">
     CGSI CFD Margin Calculator &nbsp;·&nbsp; For reference only. Not financial advice.<br>
-    GLV = Unused Cash + Total IM + Unrealised P&amp;L &nbsp;|&nbsp; FE = GLV − Total IM &nbsp;|&nbsp; IM = Entry × Qty × Margin %
+    GLV = Unused Cash + Total IM + Unrealised P&amp;L &nbsp;|&nbsp; FE = GLV − Total IM &nbsp;|&nbsp; IM = Current Price × Qty × Margin % (MTM)
   </div>
 
 </div>
@@ -496,33 +462,34 @@
       tr.innerHTML = `
         <td><input type="text" id="ticker_${r.id}" value="${r.ticker}" placeholder="e.g. TSLA"
           oninput="updateField(${r.id},'ticker',this.value)"></td>
-        <td style="width:80px">
+        <td style="width:78px">
           <select id="ccy_${r.id}" onchange="updateField(${r.id},'ccy',this.value);calc()">${ccyOpts}</select>
         </td>
         <td class="computed" id="fxshow_${r.id}" style="color:var(--text-secondary)">—</td>
-        <td style="width:90px">
+        <td style="width:88px">
           <select id="dir_${r.id}" onchange="updateField(${r.id},'dir',this.value);calc()">
             <option${r.dir==='Long'?' selected':''}>Long</option>
             <option${r.dir==='Short'?' selected':''}>Short</option>
           </select>
         </td>
-        <td style="width:100px">
+        <td style="width:96px">
           <input type="number" id="entry_${r.id}" value="${r.entry}" placeholder="0.00" min="0" step="0.01"
             oninput="updateField(${r.id},'entry',this.value);calc()">
         </td>
-        <td style="width:110px">
+        <td style="width:106px">
           <input type="number" id="current_${r.id}" value="${r.current}" placeholder="0.00" min="0" step="0.01"
             oninput="updateField(${r.id},'current',this.value);calc()">
         </td>
-        <td style="width:80px">
+        <td style="width:76px">
           <input type="number" id="qty_${r.id}" value="${r.qty}" placeholder="0" min="1" step="1"
             oninput="updateField(${r.id},'qty',this.value);calc()">
         </td>
-        <td style="width:80px">
+        <td style="width:76px">
           <input type="number" id="mrate_${r.id}" value="${r.mrate}" placeholder="10" min="0" max="100" step="0.5"
             oninput="updateField(${r.id},'mrate',this.value);calc()">
         </td>
-        <td class="computed" id="notional_${r.id}">—</td>
+        <td class="computed" id="mv_pos_${r.id}">—</td>
+        <td class="computed" id="mv_sum_${r.id}">—</td>
         <td class="computed" id="im_pos_${r.id}">—</td>
         <td class="computed" id="im_sum_${r.id}">—</td>
         <td class="computed" id="pnl_pos_${r.id}">—</td>
@@ -548,11 +515,14 @@
     const base   = getFxBase();
     const sumCcy = getSumCcy();
 
+    // Update dynamic labels
     document.getElementById('summary-label').textContent = `Account summary (${sumCcy})`;
+    const mvSumTh  = document.getElementById('mv-sum-th');
     const pnlSumTh = document.getElementById('pnl-sum-th');
+    if (mvSumTh)  mvSumTh.textContent  = `Mkt val (${sumCcy})`;
     if (pnlSumTh) pnlSumTh.textContent = `P&L (${sumCcy})`;
 
-    // Cash totals
+    // ── Cash ──────────────────────────────────────────────
     let totalCashBase = 0;
     const cashParts  = [];
     CCYS.forEach(ccy => {
@@ -561,17 +531,21 @@
       const inBase = amt * fx;
       totalCashBase += inBase;
       const convEl = document.getElementById('cash-conv-' + ccy);
-      if (convEl) convEl.textContent = (amt > 0 && ccy !== base) ? `= ${base} ${fmt(inBase)} @ ${fmt(fx,4)}` : '';
+      if (convEl) convEl.textContent = (amt > 0 && ccy !== base)
+        ? `= ${base} ${fmt(inBase)} @ ${fmt(fx,4)}` : '';
       if (amt > 0) cashParts.push(`${ccy} ${fmt(amt,0)}`);
     });
     const cashInSum = totalCashBase * getFxRate(base, sumCcy);
     document.getElementById('cash-total-base').textContent  = base   + ' ' + fmt(totalCashBase);
-    document.getElementById('cash-total-break').textContent = cashParts.length > 1 ? '( ' + cashParts.join(' + ') + ' )' : '';
+    document.getElementById('cash-total-break').textContent = cashParts.length > 1
+      ? '( ' + cashParts.join(' + ') + ' )' : '';
     document.getElementById('cash-total-sum').textContent   = sumCcy + ' ' + fmt(cashInSum);
 
-    // Positions
-    let totalIM_base = 0, totalPnL_base = 0;
-    const rowData    = [];
+    // ── Positions ─────────────────────────────────────────
+    let totalIM_base  = 0;
+    let totalPnL_base = 0;
+    let totalMV_base  = 0;
+    const rowData = [];
 
     rows.forEach(r => {
       const posCcy   = getVal(r.id,'ccy')     || r.ccy;
@@ -589,10 +563,19 @@
       const valid      = !isNaN(entry) && !isNaN(qty) && !isNaN(mrate) && entry > 0 && qty > 0;
       const hasCurrent = !isNaN(current) && current > 0;
 
-      const notional = valid ? (hasCurrent ? current * qty : entry * qty) : NaN;
-      const im_pos   = valid ? entry * qty * mrate : NaN;
-      const im_base  = valid ? im_pos * fxToBase   : NaN;
-      const im_sum   = valid ? im_pos * fxToSum    : NaN;
+      // Market value = current price × qty (pos. CCY)
+      const mv_pos  = valid && hasCurrent ? current * qty : (valid ? entry * qty : NaN);
+      const mv_sum  = !isNaN(mv_pos) ? mv_pos * fxToSum : NaN;
+      const mv_base = !isNaN(mv_pos) ? mv_pos * fxToBase : NaN;
+
+      // IM (MTM) = current price × qty × margin %
+      // Falls back to entry price if no current price entered
+      const imPrice  = (valid && hasCurrent) ? current : entry;
+      const im_pos   = valid ? imPrice * qty * mrate : NaN;
+      const im_base  = valid ? im_pos * fxToBase     : NaN;
+      const im_sum   = valid ? im_pos * fxToSum      : NaN;
+
+      // Unrealised P&L
       let pnl_pos = NaN, pnl_base = NaN, pnl_sum = NaN;
       if (valid && hasCurrent) {
         pnl_pos  = dir === 'Long' ? (current - entry) * qty : (entry - current) * qty;
@@ -602,13 +585,22 @@
 
       if (!isNaN(im_base))  totalIM_base  += im_base;
       if (!isNaN(pnl_base)) totalPnL_base += pnl_base;
-      rowData.push({ id:r.id, posCcy, fxToBase, fxToSum, notional, im_pos, im_sum, pnl_pos, pnl_sum, valid, hasCurrent });
+      if (!isNaN(mv_base))  totalMV_base  += mv_base;
+
+      rowData.push({
+        id: r.id, posCcy, fxToBase, fxToSum,
+        mv_pos, mv_sum,
+        im_pos, im_sum,
+        pnl_pos, pnl_sum,
+        valid, hasCurrent
+      });
     });
 
-    // Summary metrics in sumCcy
+    // ── Summary metrics (all in sumCcy) ───────────────────
     const fxBaseToSum    = getFxRate(base, sumCcy);
     const totalIM_sum    = totalIM_base   * fxBaseToSum;
     const totalPnL_sum   = totalPnL_base  * fxBaseToSum;
+    const totalMV_sum    = totalMV_base   * fxBaseToSum;
     const unusedCash_sum = (totalCashBase - totalIM_base) * fxBaseToSum;
     const glv_sum        = unusedCash_sum + totalIM_sum + totalPnL_sum;
     const fe_sum         = glv_sum - totalIM_sum;
@@ -617,23 +609,31 @@
     document.getElementById('m-im').textContent     = sumCcy + ' ' + fmt(totalIM_sum);
     document.getElementById('m-unused').textContent = sumCcy + ' ' + fmt(unusedCash_sum);
 
+    const tmvEl = document.getElementById('m-tmv');
+    tmvEl.textContent = rows.length > 0 ? sumCcy + ' ' + fmt(totalMV_sum) : '—';
+
     const feEl = document.getElementById('m-fe');
     feEl.textContent = sumCcy + ' ' + fmt(fe_sum);
-    feEl.className   = 'metric-value' + (fe_sum < 0 ? ' danger' : fe_sum < totalIM_sum * 0.2 && totalIM_sum > 0 ? ' warn' : '');
+    feEl.className   = 'metric-value' +
+      (fe_sum < 0 ? ' danger' : fe_sum < totalIM_sum * 0.2 && totalIM_sum > 0 ? ' warn' : '');
 
     const pnlEl = document.getElementById('m-pnl');
     pnlEl.textContent = (totalPnL_sum >= 0 ? '+' : '') + sumCcy + ' ' + fmt(totalPnL_sum);
-    pnlEl.className   = 'metric-value' + (totalPnL_sum > 0 ? ' success' : totalPnL_sum < 0 ? ' danger' : '');
+    pnlEl.className   = 'metric-value' +
+      (totalPnL_sum > 0 ? ' success' : totalPnL_sum < 0 ? ' danger' : '');
 
     const util   = totalCashBase > 0 && totalIM_base > 0 ? (totalIM_base / totalCashBase) * 100 : 0;
     const utilEl = document.getElementById('m-util');
     utilEl.textContent = fmt(util, 1) + '%';
     utilEl.className   = 'metric-value' + (util > 90 ? ' danger' : util > 70 ? ' warn' : '');
 
+    // FE bar
     const pct = cashInSum > 0 ? Math.max(0, Math.min(100, (fe_sum / cashInSum) * 100)) : 100;
     const bar = document.getElementById('fe-bar');
     bar.style.width      = pct + '%';
-    bar.style.background = fe_sum < 0 ? 'var(--bg-danger)' : pct < 20 ? 'var(--bg-warning)' : 'var(--bg-success)';
+    bar.style.background = fe_sum < 0
+      ? 'var(--bg-danger)' : pct < 20
+      ? 'var(--bg-warning)' : 'var(--bg-success)';
 
     const noteEl = document.getElementById('fe-note');
     noteEl.textContent = rows.length === 0
@@ -642,28 +642,56 @@
         ? 'Margin call triggered — FE is negative'
         : `FE is ${fmt(pct,1)}% of total cash deposited`;
 
-    // Row cells
+    // ── Row cells ─────────────────────────────────────────
     rowData.forEach(r => {
-      const notionalEl = document.getElementById('notional_' + r.id);
-      const imPosEl    = document.getElementById('im_pos_'   + r.id);
-      const imSumEl    = document.getElementById('im_sum_'   + r.id);
-      const pnlPosEl   = document.getElementById('pnl_pos_'  + r.id);
-      const pnlSumEl   = document.getElementById('pnl_sum_'  + r.id);
+      const mvPosEl  = document.getElementById('mv_pos_'  + r.id);
+      const mvSumEl  = document.getElementById('mv_sum_'  + r.id);
+      const imPosEl  = document.getElementById('im_pos_'  + r.id);
+      const imSumEl  = document.getElementById('im_sum_'  + r.id);
+      const pnlPosEl = document.getElementById('pnl_pos_' + r.id);
+      const pnlSumEl = document.getElementById('pnl_sum_' + r.id);
 
-      if (notionalEl) notionalEl.textContent = !isNaN(r.notional) ? r.posCcy + ' ' + fmt(r.notional) : '—';
-      if (imPosEl)    imPosEl.textContent    = !isNaN(r.im_pos)   ? r.posCcy + ' ' + fmt(r.im_pos)   : '—';
+      // Market value (pos. CCY)
+      if (mvPosEl) {
+        if (!isNaN(r.mv_pos)) {
+          mvPosEl.innerHTML = r.posCcy + ' ' + fmt(r.mv_pos) +
+            (!r.hasCurrent ? '<span class="mtm-note">using entry price</span>' : '');
+        } else { mvPosEl.textContent = '—'; }
+      }
+
+      // Market value (sum. CCY)
+      if (mvSumEl) {
+        if (!isNaN(r.mv_sum)) {
+          mvSumEl.innerHTML = sumCcy + ' ' + fmt(r.mv_sum) +
+            (r.posCcy !== sumCcy ? `<span class="tag-conv">@ ${fmt(r.fxToSum,4)}</span>` : '');
+        } else { mvSumEl.textContent = '—'; }
+      }
+
+      // IM (pos. CCY) — MTM
+      if (imPosEl) {
+        if (!isNaN(r.im_pos)) {
+          imPosEl.innerHTML = r.posCcy + ' ' + fmt(r.im_pos) +
+            (!r.hasCurrent ? '<span class="mtm-note">using entry price</span>' : '');
+        } else { imPosEl.textContent = '—'; }
+      }
+
+      // IM (sum. CCY)
       if (imSumEl) {
         if (!isNaN(r.im_sum)) {
           imSumEl.innerHTML = sumCcy + ' ' + fmt(r.im_sum) +
             (r.posCcy !== sumCcy ? `<span class="tag-conv">@ ${fmt(r.fxToSum,4)}</span>` : '');
         } else { imSumEl.textContent = '—'; }
       }
+
+      // P&L (pos. CCY)
       if (pnlPosEl) {
         if (!isNaN(r.pnl_pos)) {
           pnlPosEl.textContent = (r.pnl_pos >= 0 ? '+' : '') + r.posCcy + ' ' + fmt(r.pnl_pos);
           pnlPosEl.className   = pnlClass(r.pnl_pos);
         } else { pnlPosEl.textContent = '—'; pnlPosEl.className = 'computed pnl-zero'; }
       }
+
+      // P&L (sum. CCY)
       if (pnlSumEl) {
         if (!isNaN(r.pnl_sum)) {
           pnlSumEl.textContent = (r.pnl_sum >= 0 ? '+' : '') + sumCcy + ' ' + fmt(r.pnl_sum);
