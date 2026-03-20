@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CGSI CFD Margin Calculator</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     :root {
       --bg:#ffffff; --bg-secondary:#f5f5f4; --bg-tertiary:#eeece9;
       --bg-danger:#fce8e8; --bg-warning:#fef3e2; --bg-success:#eaf3de; --bg-info:#e6f1fb;
@@ -40,6 +40,7 @@
     .panel-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .panel-row label { font-size:13px; color:var(--text-secondary); white-space:nowrap; }
     .panel-hint { font-size:11px; color:var(--text-tertiary); margin-top:6px; }
+    /* API card */
     .api-card { background:var(--bg-secondary); border:0.5px solid var(--border); border-radius:var(--radius-lg); margin-bottom:1.25rem; overflow:hidden; }
     .api-card-header { display:flex; align-items:center; justify-content:space-between; padding:10px 1.25rem; cursor:pointer; user-select:none; }
     .api-card-header:hover { background:var(--bg-tertiary); }
@@ -65,12 +66,13 @@
     .api-status.info { color:var(--text-tertiary); }
     .exch-guide { background:var(--bg); border-radius:var(--radius-md); padding:10px 14px; margin-top:10px; border:0.5px solid var(--border); }
     .exch-guide-title { font-size:11px; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px; }
-    .exch-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+    .exch-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; }
     @media(max-width:700px){ .exch-grid { grid-template-columns:repeat(2,1fr); } }
     .exch-item { font-size:11px; color:var(--text-secondary); line-height:1.5; }
     .exch-item strong { color:var(--text); }
+    /* Cash */
     .cash-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; margin-bottom:12px; }
-    @media(max-width:700px){ .cash-grid { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:700px){ .cash-grid { grid-template-columns:repeat(3,1fr); } }
     .cash-card { background:var(--bg-secondary); border-radius:var(--radius-md); padding:12px 14px; }
     .cash-card-label { font-size:11px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.05em; }
     .cash-converted { font-size:11px; color:var(--text-tertiary); margin-top:5px; min-height:16px; }
@@ -78,24 +80,27 @@
     .cash-total-label { font-size:13px; color:var(--text-secondary); }
     .cash-total-val { font-size:15px; font-weight:600; color:var(--text); }
     .cash-total-break { font-size:12px; color:var(--text-tertiary); }
-    .fx-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
-    @media(max-width:640px){ .fx-grid { grid-template-columns:repeat(2,1fr); } }
+    /* FX */
+    .fx-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    @media(max-width:700px){ .fx-grid { grid-template-columns:repeat(3,1fr); } }
     .fx-card { background:var(--bg-secondary); border-radius:var(--radius-md); padding:10px 12px; }
     .fx-pair { font-size:11px; font-weight:600; color:var(--text-tertiary); margin-bottom:5px; text-transform:uppercase; letter-spacing:0.05em; }
     .fx-same { font-size:14px; font-weight:600; color:var(--text-tertiary); padding:5px 0; }
     .fx-live-badge { font-size:10px; color:var(--text-success); font-weight:600; display:block; margin-top:3px; }
+    /* Metrics */
     .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-bottom:1.25rem; }
     @media(max-width:900px){ .metrics { grid-template-columns:repeat(2,1fr); } }
     .metric { background:var(--bg-secondary); border-radius:var(--radius-md); padding:12px 14px; }
     .metric-label { font-size:12px; color:var(--text-secondary); margin-bottom:4px; }
     .metric-value { font-size:18px; font-weight:600; color:var(--text); }
     .metric-value.danger { color:var(--text-danger); }
-    .metric-value.success { color:var(--text-success); }
-    .metric-value.warn { color:var(--text-warning); }
-    .metric-value.info { color:var(--text-info); }
+    .metric-value.success{ color:var(--text-success); }
+    .metric-value.warn   { color:var(--text-warning); }
+    .metric-value.info   { color:var(--text-info); }
     .fe-bar-bg { height:8px; background:var(--bg-secondary); border-radius:4px; overflow:hidden; margin-top:8px; margin-bottom:6px; }
     .fe-bar-fill { height:100%; border-radius:4px; transition:width 0.25s,background 0.25s; }
     .fe-bar-note { font-size:12px; color:var(--text-tertiary); }
+    /* Table */
     .table-wrap { overflow-x:auto; }
     table { width:100%; border-collapse:collapse; font-size:13px; min-width:1500px; }
     th { font-size:11px; font-weight:600; color:var(--text-tertiary); text-align:left; padding:7px 8px; border-bottom:0.5px solid var(--border); white-space:nowrap; background:var(--bg-secondary); }
@@ -113,7 +118,7 @@
     .computed { font-size:13px; color:var(--text); white-space:nowrap; }
     .pnl-pos { color:var(--text-success); }
     .pnl-neg { color:var(--text-danger); }
-    .pnl-zero { color:var(--text-secondary); }
+    .pnl-zero{ color:var(--text-secondary); }
     .tag-conv { font-size:11px; color:var(--text-tertiary); display:block; margin-top:2px; }
     .mtm-note { font-size:11px; color:var(--text-warning); display:block; margin-top:2px; }
     .live-badge { font-size:10px; color:var(--text-success); font-weight:600; display:block; margin-top:2px; }
@@ -125,6 +130,7 @@
     .btn-del { width:28px; height:28px; border:none; background:transparent; color:var(--text-tertiary); cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; border-radius:var(--radius-sm); transition:background 0.15s; }
     .btn-del:hover { background:var(--bg-danger); color:var(--text-danger); }
     .row-count { font-size:12px; color:var(--text-tertiary); margin-top:6px; }
+    /* Financing */
     .fin-card { background:var(--bg); border:0.5px solid var(--border); border-radius:var(--radius-lg); padding:1.25rem 1.5rem; margin-bottom:1.25rem; border-top:3px solid #378add; }
     .fin-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:12px; align-items:end; margin-bottom:1.25rem; }
     @media(max-width:860px){ .fin-top { grid-template-columns:1fr 1fr; } }
@@ -151,24 +157,33 @@
     .fin-formula { font-size:11px; color:var(--text-tertiary); background:var(--bg-secondary); border-radius:var(--radius-md); padding:8px 12px; margin-top:1rem; line-height:1.6; }
     .fin-no-pos { text-align:center; padding:2rem; font-size:14px; color:var(--text-tertiary); }
     /* AI */
-    .ai-card { background:var(--bg); border:0.5px solid var(--border); border-radius:var(--radius-lg); padding:1.25rem 1.5rem; margin-bottom:1.25rem; border-top:3px solid #d4820a; }
-    .ai-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:1rem; }
-    .ai-title { font-size:11px; font-weight:600; color:#d4820a; text-transform:uppercase; letter-spacing:0.07em; }
-    .ai-subtitle { font-size:12px; color:var(--text-tertiary); margin-top:3px; }
-    .btn-ai { padding:10px 20px; border:none; border-radius:var(--radius-md); background:#d4820a; color:#fff; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; transition:background 0.15s; }
-    .btn-ai:hover { background:#b36d08; }
-    .btn-ai:disabled { opacity:0.5; cursor:not-allowed; }
-    .ai-sections { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-bottom:1rem; }
-    @media(max-width:700px){ .ai-sections { grid-template-columns:1fr; } }
-    .ai-section-tag { font-size:11px; padding:4px 10px; border-radius:20px; background:rgba(212,130,10,0.10); color:#b36d08; font-weight:500; text-align:center; }
-    .ai-loading { display:flex; align-items:center; gap:10px; color:var(--text-tertiary); font-size:13px; margin-top:1rem; }
-    .ai-loading-dot { width:8px; height:8px; border-radius:50%; background:#d4820a; animation:pulse 1.2s infinite; }
-    .ai-loading-dot:nth-child(2){ animation-delay:0.2s; }
-    .ai-loading-dot:nth-child(3){ animation-delay:0.4s; }
+    .ai-card { background:var(--bg); border:0.5px solid var(--border); border-radius:var(--radius-lg); padding:1.25rem 1.5rem; margin-bottom:1.25rem; border-top:3px solid #1d9e75; }
+    .ai-tabs { display:flex; gap:8px; margin-bottom:1.25rem; flex-wrap:wrap; }
+    .ai-tab { padding:8px 18px; border:0.5px solid var(--border-md); border-radius:var(--radius-md); font-size:13px; font-weight:500; cursor:pointer; background:var(--bg-secondary); color:var(--text-secondary); font-family:inherit; transition:all 0.15s; }
+    .ai-tab.active { background:#1d9e75; color:#fff; border-color:#1d9e75; }
+    .ai-tab:hover:not(.active) { background:var(--bg-tertiary); }
+    .ai-panel { display:none; }
+    .ai-panel.active { display:block; }
+    .ai-panel-header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:1rem; }
+    .ai-panel-title { font-size:11px; font-weight:600; color:#0f6e56; text-transform:uppercase; letter-spacing:0.07em; }
+    .ai-panel-sub { font-size:12px; color:var(--text-tertiary); margin-top:3px; max-width:600px; }
+    .btn-analyse { padding:10px 20px; border:none; border-radius:var(--radius-md); background:#1d9e75; color:#fff; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; transition:background 0.15s; white-space:nowrap; }
+    .btn-analyse:hover { background:#0f6e56; }
+    .btn-analyse:disabled { opacity:0.5; cursor:not-allowed; }
+    .ai-stock-row { display:flex; align-items:center; gap:10px; margin-bottom:1rem; flex-wrap:wrap; }
+    .ai-stock-row label { font-size:13px; color:var(--text-secondary); white-space:nowrap; }
+    .ai-stock-row select { width:auto; min-width:220px; padding:8px 10px; border:0.5px solid var(--border-md); border-radius:var(--radius-md); font-size:14px; background:var(--bg); color:var(--text); outline:none; font-family:inherit; }
+    .ai-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:1rem; }
+    .ai-tag { font-size:11px; padding:3px 10px; border-radius:20px; background:rgba(29,158,117,0.10); color:#0f6e56; font-weight:500; }
+    .ai-loading { display:flex; align-items:center; gap:10px; color:var(--text-tertiary); font-size:13px; padding:1rem 0; }
+    .ai-dot { width:8px; height:8px; border-radius:50%; background:#1d9e75; animation:pulse 1.2s infinite; }
+    .ai-dot:nth-child(2){ animation-delay:0.2s; }
+    .ai-dot:nth-child(3){ animation-delay:0.4s; }
     @keyframes pulse { 0%,100%{opacity:0.3;transform:scale(0.8)} 50%{opacity:1;transform:scale(1)} }
-    .ai-output { background:var(--bg-secondary); border-radius:var(--radius-md); padding:1rem 1.25rem; margin-top:1rem; font-size:14px; line-height:1.8; color:var(--text); min-height:60px; white-space:pre-wrap; }
-    .ai-output.placeholder { color:var(--text-tertiary); font-size:13px; }
+    .ai-output { background:var(--bg-secondary); border-radius:var(--radius-md); padding:1rem 1.25rem; font-size:14px; line-height:1.85; color:var(--text); min-height:60px; white-space:pre-wrap; word-break:break-word; display:none; }
+    .ai-placeholder { background:var(--bg-secondary); border-radius:var(--radius-md); padding:1rem 1.25rem; font-size:13px; color:var(--text-tertiary); }
     .ai-disclaimer { font-size:11px; color:var(--text-tertiary); margin-top:8px; }
+    .ai-free-badge { font-size:11px; color:var(--text-success); font-weight:500; margin-top:4px; }
     .divider-label { display:flex; align-items:center; gap:12px; margin:2rem 0 1.25rem; }
     .divider-label span { font-size:13px; font-weight:500; color:var(--text-secondary); white-space:nowrap; }
     .divider-label::before,.divider-label::after { content:''; flex:1; height:0.5px; background:var(--border); }
@@ -179,35 +194,36 @@
 <div class="page">
 
   <div class="header">
-    <h1>CGSI CFD Margin Calculator <span class="version">(v1.3)</span> <span class="creator">— created by Joon</span></h1>
+    <h1>CGSI CFD Margin Calculator <span class="version">(v1.4)</span> <span class="creator">— created by Joon</span></h1>
     <p>Based on Contract for Difference (CGSI Singapore) mechanism.</p>
-    <span class="badge">Multi-currency · Up to 10 positions · MTM margin · Live data · Claude AI analysis</span>
+    <span class="badge">Multi-currency · Up to 10 positions · MTM margin · Live data · Free AI analysis</span>
   </div>
 
-  <!-- Data settings (collapsed) -->
-  <div class="api-card" id="api-card">
+  <!-- Data settings -->
+  <div class="api-card">
     <div class="api-card-header" onclick="toggleApiCard()">
-      <span class="api-card-title">Data settings (stock price API)</span>
+      <span class="api-card-title">Data settings (Twelve Data API key — stock prices)</span>
       <span class="api-card-toggle" id="api-card-arrow">▼ show</span>
     </div>
     <div class="api-card-body" id="api-card-body">
       <div class="api-row">
-        <label>Twelve Data API key</label>
+        <label>API key</label>
         <div class="api-key-wrap">
           <input type="text" class="api-inp" id="td-api-key" autocomplete="off">
-          <button class="btn-eye" onclick="toggleKeyVisibility('td-api-key')" title="Show/hide">👁</button>
+          <button class="btn-eye" onclick="document.getElementById('td-api-key').classList.toggle('revealed')">👁</button>
         </div>
-        <button class="btn-api" onclick="testApiKey()">Test key</button>
+        <button class="btn-api" onclick="testTdKey()">Test key</button>
       </div>
-      <div class="api-hint">Free at <a href="https://twelvedata.com" target="_blank">twelvedata.com</a> — 800 calls/day.</div>
-      <div class="api-status info" id="api-status">Key pre-loaded.</div>
+      <div class="api-hint">Free at <a href="https://twelvedata.com" target="_blank">twelvedata.com</a> — 800 calls/day, no credit card.</div>
+      <div class="api-status info" id="td-status">Key pre-loaded.</div>
       <div class="exch-guide">
-        <div class="exch-guide-title">Exchange codes &amp; ticker format</div>
+        <div class="exch-guide-title">Ticker format by exchange</div>
         <div class="exch-grid">
-          <div class="exch-item"><strong>US (NYSE/NASDAQ)</strong><br>TSLA, AAPL, MSFT<br><em>No suffix needed</em></div>
+          <div class="exch-item"><strong>US (NYSE/NASDAQ)</strong><br>TSLA, AAPL, MSFT<br><em>No suffix</em></div>
           <div class="exch-item"><strong>Hong Kong (HKEX)</strong><br>0700, 9988, 0005<br><em>4-digit code</em></div>
           <div class="exch-item"><strong>Malaysia (KLSE)</strong><br>1155, 5347, 1023<br><em>4-digit code</em></div>
           <div class="exch-item"><strong>Japan (TSE)</strong><br>7203, 6758, 9984<br><em>4-digit code</em></div>
+          <div class="exch-item"><strong>Singapore (SGX)</strong><br>D05, Z74, U11<br><em>3-char code</em></div>
         </div>
       </div>
     </div>
@@ -220,7 +236,7 @@
       <div class="panel-row">
         <label>FX rates expressed as X →</label>
         <select id="fx-base" class="base-sel" onchange="renderFxGrid();calc()">
-          <option>MYR</option><option>SGD</option><option>USD</option><option>HKD</option>
+          <option>MYR</option><option>SGD</option><option>USD</option><option>HKD</option><option>JPY</option>
         </select>
       </div>
       <div class="panel-hint">Used for all internal currency conversions</div>
@@ -230,7 +246,7 @@
       <div class="panel-row">
         <label>Display GLV / IM / FE in</label>
         <select id="sum-ccy" class="base-sel" onchange="calc()">
-          <option>MYR</option><option>SGD</option><option>USD</option><option>HKD</option>
+          <option>MYR</option><option>SGD</option><option>USD</option><option>HKD</option><option>JPY</option>
         </select>
       </div>
       <div class="panel-hint">Independent of FX base — converts totals for display only</div>
@@ -250,14 +266,14 @@
     </div>
   </div>
 
-  <!-- FX rates -->
+  <!-- FX rates — now 5 currencies incl. JPY -->
   <div class="card">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
       <div class="section-label" style="margin-bottom:0">FX rates (to FX base currency)</div>
       <button class="btn-api" onclick="fetchLiveFx()" id="btn-fx-refresh" style="font-size:12px;padding:6px 12px;">↻ Fetch live FX rates</button>
     </div>
     <div class="fx-grid" id="fx-grid"></div>
-    <div class="api-status info" id="fx-status" style="margin-top:8px">Click "Fetch live FX rates" to load ECB rates from frankfurter.app. Rates remain editable.</div>
+    <div class="api-status info" id="fx-status" style="margin-top:8px">Click "Fetch live FX rates" to load ECB rates from frankfurter.app. All rates are editable.</div>
   </div>
 
   <!-- Account summary -->
@@ -349,104 +365,155 @@
   </div>
 
   <!-- AI Analysis -->
-  <div class="divider-label"><span>AI portfolio analysis</span></div>
+  <div class="divider-label"><span>AI analysis — free, no API key needed</span></div>
   <div class="ai-card">
-    <div class="ai-header">
-      <div>
-        <div class="ai-title">AI Portfolio Analyser — powered by Claude (Anthropic)</div>
-        <div class="ai-subtitle">Uses Claude AI to analyse your portfolio from first principles and provide actionable suggestions</div>
+
+    <div class="ai-tabs">
+      <button class="ai-tab active" onclick="switchTab('portfolio')">Portfolio risk &amp; reward</button>
+      <button class="ai-tab" onclick="switchTab('stock')">Stock deep dive</button>
+    </div>
+
+    <!-- Tab 1: Portfolio -->
+    <div class="ai-panel active" id="tab-portfolio">
+      <div class="ai-panel-header">
+        <div>
+          <div class="ai-panel-title">Portfolio risk &amp; reward analysis</div>
+          <div class="ai-panel-sub">Analyses your leveraged positions vs cash deposited — margin call risk, FE buffer, reward/risk ratio, financing burden, and suggested actions</div>
+        </div>
+        <button class="btn-analyse" id="btn-portfolio" onclick="runPortfolioAnalysis()">Analyse portfolio</button>
       </div>
-      <button class="btn-ai" id="btn-ai" onclick="runAiAnalysis()">Analyse portfolio</button>
+      <div class="ai-tags">
+        <span class="ai-tag">Leverage risk vs cash</span>
+        <span class="ai-tag">Margin call scenarios</span>
+        <span class="ai-tag">FE buffer health</span>
+        <span class="ai-tag">Reward / risk ratio</span>
+        <span class="ai-tag">Concentration risk</span>
+        <span class="ai-tag">Financing burden</span>
+        <span class="ai-tag">Priority actions</span>
+      </div>
+      <div id="portfolio-loading" style="display:none" class="ai-loading">
+        <div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div>
+        <span>AI is analysing your portfolio…</span>
+      </div>
+      <div class="ai-placeholder" id="portfolio-placeholder">Click "Analyse portfolio" to get a risk/reward analysis of your leveraged positions versus your deposited cash.</div>
+      <div class="ai-output" id="portfolio-output"></div>
+      <div class="ai-disclaimer">For informational purposes only. Not financial advice.</div>
+      <div class="ai-free-badge">Powered by Pollinations AI (Mistral open-source model) · Free · No API key required</div>
     </div>
-    <div class="ai-sections">
-      <div class="ai-section-tag">Margin call risk</div>
-      <div class="ai-section-tag">Position concentration</div>
-      <div class="ai-section-tag">Financing cost burden</div>
-      <div class="ai-section-tag">Free equity buffer health</div>
-      <div class="ai-section-tag">Long vs short exposure</div>
-      <div class="ai-section-tag">Suggested actions</div>
+
+    <!-- Tab 2: Stock deep dive -->
+    <div class="ai-panel" id="tab-stock">
+      <div class="ai-panel-header">
+        <div>
+          <div class="ai-panel-title">Stock deep dive — analysis, narrative &amp; outlook</div>
+          <div class="ai-panel-sub">Fundamental analysis, market narrative, short &amp; long term views, and price target estimates based on the AI's training knowledge. Note: does not have access to today's live news — for latest headlines use a search engine alongside this.</div>
+        </div>
+        <button class="btn-analyse" id="btn-stock" onclick="runStockAnalysis()">Analyse stock</button>
+      </div>
+      <div class="ai-stock-row">
+        <label>Select position</label>
+        <select id="stock-select"><option value="">— add positions above —</option></select>
+      </div>
+      <div class="ai-tags">
+        <span class="ai-tag">Business overview</span>
+        <span class="ai-tag">Market narrative</span>
+        <span class="ai-tag">Short-term view (1–4 weeks)</span>
+        <span class="ai-tag">Long-term view (6–12 months)</span>
+        <span class="ai-tag">Analyst price target range</span>
+        <span class="ai-tag">Key risks</span>
+        <span class="ai-tag">CFD position assessment</span>
+      </div>
+      <div id="stock-loading" style="display:none" class="ai-loading">
+        <div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div>
+        <span>AI is generating stock analysis…</span>
+      </div>
+      <div class="ai-placeholder" id="stock-placeholder">Select a position and click "Analyse stock" to get an AI-powered deep dive including market narrative, short/long term views, and price target estimates.</div>
+      <div class="ai-output" id="stock-output"></div>
+      <div class="ai-disclaimer">Analysis is based on AI training data — not live news. For the latest news, cross-reference with financial news sources. Not financial advice.</div>
+      <div class="ai-free-badge">Powered by Pollinations AI (Mistral open-source model) · Free · No API key required</div>
     </div>
-    <div id="ai-loading" style="display:none" class="ai-loading">
-      <div class="ai-loading-dot"></div>
-      <div class="ai-loading-dot"></div>
-      <div class="ai-loading-dot"></div>
-      <span>Claude is analysing your portfolio…</span>
-    </div>
-    <div class="ai-output placeholder" id="ai-output">Click "Analyse portfolio" to get a Claude AI first-principles analysis covering margin risk, position health, financing burden, and actionable suggestions.</div>
-    <div class="ai-disclaimer">Analysis is generated by Claude AI (Anthropic) and is for informational purposes only. It does not constitute financial advice. Always consult a licensed financial adviser before making investment decisions.</div>
+
   </div>
 
   <div class="footer">
-    CGSI CFD Margin Calculator (v1.3) — created by Joon &nbsp;·&nbsp; For reference only. Not financial advice.<br>
+    CGSI CFD Margin Calculator (v1.4) — created by Joon &nbsp;·&nbsp; For reference only. Not financial advice.<br>
     GLV = Unused Cash + Total IM + Unrealised P&amp;L &nbsp;|&nbsp; FE = GLV − Total IM &nbsp;|&nbsp;
     IM = Current Price × Qty × Margin % (MTM) &nbsp;|&nbsp; Financing = Rate % × Mkt Val ÷ 360<br>
     Live prices: <a href="https://twelvedata.com" target="_blank" style="color:var(--text-tertiary)">Twelve Data</a> &nbsp;·&nbsp;
     Live FX: <a href="https://frankfurter.app" target="_blank" style="color:var(--text-tertiary)">frankfurter.app</a> (ECB) &nbsp;·&nbsp;
-    AI: <a href="https://anthropic.com" target="_blank" style="color:var(--text-tertiary)">Claude by Anthropic</a>
+    AI: <a href="https://pollinations.ai" target="_blank" style="color:var(--text-tertiary)">Pollinations AI</a> (free, open-source)
   </div>
 </div>
 
 <script>
-  const CCYS      = ['MYR','SGD','USD','HKD'];
+  const CCYS      = ['MYR','SGD','USD','HKD','JPY'];
   const CASH_CCYS = ['MYR','SGD','USD','HKD','JPY'];
+  const POS_CCYS  = ['MYR','SGD','USD','HKD','JPY'];
+
   const EXCHANGES = [
     { label:'US (NYSE/NASDAQ)', code:'',     ccy:'USD' },
     { label:'Hong Kong (HKEX)', code:'HKEX', ccy:'HKD' },
     { label:'Malaysia (KLSE)',  code:'KLSE', ccy:'MYR' },
-    { label:'Japan (TSE)',      code:'TSE',  ccy:'HKD' },
+    { label:'Japan (TSE)',      code:'TSE',  ccy:'JPY' },
     { label:'Singapore (SGX)',  code:'SGX',  ccy:'SGD' },
     { label:'Other',            code:'',     ccy:'USD' },
   ];
+
   const DEFAULT_FX = {
-    MYR:{ MYR:1,      SGD:3.07,   USD:3.92,   HKD:0.50,   JPY:0.026  },
-    SGD:{ MYR:0.3257, SGD:1,      USD:1.2769, HKD:0.1629, JPY:0.0085 },
-    USD:{ MYR:0.2551, SGD:0.7832, USD:1,      HKD:0.1276, JPY:0.0066 },
-    HKD:{ MYR:2.00,   SGD:6.14,   USD:7.84,   HKD:1,      JPY:0.052  }
+    MYR:{ MYR:1,       SGD:3.07,    USD:3.92,    HKD:0.50,    JPY:0.0262  },
+    SGD:{ MYR:0.3257,  SGD:1,       USD:1.2769,  HKD:0.1629,  JPY:0.00854 },
+    USD:{ MYR:0.2551,  SGD:0.7832,  USD:1,       HKD:0.1276,  JPY:0.00669 },
+    HKD:{ MYR:2.00,    SGD:6.14,    USD:7.84,    HKD:1,       JPY:0.0524  },
+    JPY:{ MYR:38.17,   SGD:117.1,   USD:149.5,   HKD:19.08,   JPY:1       }
   };
 
-  // Embedded API keys
-  const TD_KEY      = '5843b68ae53749aa8a949d5706b9660c';
-  const CLAUDE_KEY  = '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';
-  const CLAUDE_MODEL = 'claude-haiku-4-5-20251001';
-
+  const TD_KEY = '5843b68ae53749aa8a949d5706b9660c';
   let rows=[], nextId=0, latestRowData=[];
   const cashValues={MYR:0,SGD:0,USD:0,HKD:0,JPY:0};
 
   function getFxBase(){ return document.getElementById('fx-base').value; }
   function getSumCcy(){ return document.getElementById('sum-ccy').value; }
-  function getTdKey() { const v=document.getElementById('td-api-key').value.trim(); return v||TD_KEY; }
+  function getTdKey() { return document.getElementById('td-api-key').value.trim()||TD_KEY; }
   function fxId(f,t) { return `fx_${f}_${t}`; }
+
   function getFxRate(from,to){
     if(from===to) return 1;
     const base=getFxBase();
-    if(to===base){ const el=document.getElementById(fxId(from,base)); return el?(parseFloat(el.value)||1):1; }
-    if(from===base){ const el=document.getElementById(fxId(to,base)); return 1/(el?(parseFloat(el.value)||1):1); }
+    if(to===base){
+      const el=document.getElementById(fxId(from,base));
+      return el?(parseFloat(el.value)||1):1;
+    }
+    if(from===base){
+      const el=document.getElementById(fxId(to,base));
+      return 1/(el?(parseFloat(el.value)||1):1);
+    }
     return getFxRate(from,base)/getFxRate(to,base);
   }
-  function getJpyToBase(){ return DEFAULT_FX[getFxBase()]?.JPY||1; }
 
   function toggleApiCard(){
     const body=document.getElementById('api-card-body');
     const arrow=document.getElementById('api-card-arrow');
-    const open=body.classList.toggle('open');
-    arrow.textContent=open?'▲ hide':'▼ show';
-  }
-  function toggleKeyVisibility(id){
-    const inp=document.getElementById(id);
-    if(inp) inp.classList.toggle('revealed');
+    body.classList.toggle('open');
+    arrow.textContent=body.classList.contains('open')?'▲ hide':'▼ show';
   }
 
-  async function testApiKey(){
-    const key=getTdKey(); if(!key){ setApiStatus('No key found.','info'); return; }
-    setApiStatus('Testing…','info');
+  function switchTab(tab){
+    document.querySelectorAll('.ai-tab').forEach((t,i)=>t.classList.toggle('active',['portfolio','stock'][i]===tab));
+    document.getElementById('tab-portfolio').classList.toggle('active',tab==='portfolio');
+    document.getElementById('tab-stock').classList.toggle('active',tab==='stock');
+  }
+
+  // ── Twelve Data ───────────────────────────────────────
+  async function testTdKey(){
+    const key=getTdKey();
+    setStatus('td-status','Testing…','info');
     try{
       const r=await fetch(`https://api.twelvedata.com/price?symbol=AAPL&apikey=${key}`);
       const d=await r.json();
-      if(d.price) setApiStatus(`Key valid ✓  AAPL: $${parseFloat(d.price).toFixed(2)}`,'ok');
-      else        setApiStatus(`Error: ${d.message||'Unknown'}`,'err');
-    }catch(e){ setApiStatus('Network error.','err'); }
+      d.price?setStatus('td-status',`Valid ✓  AAPL: $${parseFloat(d.price).toFixed(2)}`,'ok')
+             :setStatus('td-status',`Error: ${d.message||'Unknown'}`,'err');
+    }catch(e){ setStatus('td-status','Network error.','err'); }
   }
-  function setApiStatus(msg,cls){ const el=document.getElementById('api-status'); el.textContent=msg; el.className='api-status '+cls; }
 
   async function fetchLivePrice(id){
     const key=getTdKey();
@@ -467,32 +534,196 @@
         const badge=document.getElementById('live_badge_'+id);
         if(badge){ badge.textContent=`● LIVE (${symbol})`; badge.style.display='block'; }
         calc();
-      } else { alert(`Could not fetch "${symbol}": ${d.message||'Unknown'}.\n\nCheck ticker format in Data Settings.`); }
-    }catch(e){ alert('Network error.'); }
+      } else { alert(`Could not fetch "${symbol}": ${d.message||'Unknown'}.`); }
+    }catch(e){ alert('Network error fetching price.'); }
     finally{ if(btn){ btn.disabled=false; btn.textContent='↓ Fetch'; } }
   }
 
   async function fetchLiveFx(){
     const base=getFxBase();
     const btn=document.getElementById('btn-fx-refresh');
-    const status=document.getElementById('fx-status');
     if(btn){ btn.disabled=true; btn.textContent='Fetching…'; }
-    status.textContent='Fetching…'; status.className='api-status info';
-    const symbols=CCYS.filter(c=>c!==base).join(',');
+    setStatus('fx-status','Fetching live FX rates…','info');
+    // frankfurter.app supports JPY
+    const others=CCYS.filter(c=>c!==base).join(',');
     try{
-      const r=await fetch(`https://api.frankfurter.app/latest?from=${base}&to=${symbols}`);
+      const r=await fetch(`https://api.frankfurter.app/latest?from=${base}&to=${others}`);
       const d=await r.json();
       if(d.rates){
-        CCYS.filter(c=>c!==base).forEach(ccy=>{ const rate=d.rates[ccy]; if(rate){ const el=document.getElementById(fxId(ccy,base)); if(el) el.value=(1/rate).toFixed(4); } });
+        CCYS.filter(c=>c!==base).forEach(ccy=>{
+          const rate=d.rates[ccy];
+          if(rate){ const el=document.getElementById(fxId(ccy,base)); if(el) el.value=(1/rate).toFixed(ccy==='JPY'?6:4); }
+        });
         const ts=new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-        status.textContent=`Live FX loaded (ECB · ${ts}). Editable.`; status.className='api-status ok';
+        setStatus('fx-status',`Live FX rates loaded (ECB · ${ts}). All rates editable.`,'ok');
         CCYS.filter(c=>c!==base).forEach(ccy=>{ const b=document.getElementById('fx_live_'+ccy); if(b){ b.textContent='● LIVE'; b.style.display='block'; } });
         calc();
-      } else { status.textContent=`FX error: ${d.message||'Unknown'}`; status.className='api-status err'; }
-    }catch(e){ status.textContent='Network error.'; status.className='api-status err'; }
+      } else { setStatus('fx-status',`FX error: ${d.message||'Unknown'}`,'err'); }
+    }catch(e){ setStatus('fx-status','Network error.','err'); }
     finally{ if(btn){ btn.disabled=false; btn.textContent='↻ Fetch live FX rates'; } }
   }
 
+  function setStatus(id,msg,cls){ const el=document.getElementById(id); if(el){ el.textContent=msg; el.className='api-status '+cls; } }
+
+  // ── Pollinations AI ───────────────────────────────────
+  async function callPollinations(prompt, loadingId, placeholderId, outputId, btnId, btnLabel){
+    const btn=document.getElementById(btnId);
+    const loading=document.getElementById(loadingId);
+    const placeholder=document.getElementById(placeholderId);
+    const output=document.getElementById(outputId);
+
+    btn.disabled=true; btn.textContent='Analysing…';
+    loading.style.display='flex';
+    placeholder.style.display='none';
+    output.style.display='none';
+
+    try{
+      // Pollinations text API — completely free, no key
+      const encoded=encodeURIComponent(prompt);
+      const url=`https://text.pollinations.ai/${encoded}?model=mistral&json=false`;
+      const r=await fetch(url);
+      if(!r.ok) throw new Error(`HTTP ${r.status}`);
+      const text=await r.text();
+      if(text && text.trim().length>0){
+        output.textContent=text.trim();
+        output.style.display='block';
+      } else {
+        throw new Error('Empty response received');
+      }
+    }catch(e){
+      output.textContent=`Analysis failed: ${e.message}.\n\nThis may be a temporary issue with the free AI service. Please try again in a moment.`;
+      output.style.display='block';
+    }finally{
+      loading.style.display='none';
+      btn.disabled=false; btn.textContent=btnLabel;
+    }
+  }
+
+  async function runPortfolioAnalysis(){
+    const sumCcy=getSumCcy();
+    const glv   =document.getElementById('m-glv').textContent;
+    const im    =document.getElementById('m-im').textContent;
+    const fe    =document.getElementById('m-fe').textContent;
+    const unused=document.getElementById('m-unused').textContent;
+    const tmv   =document.getElementById('m-tmv').textContent;
+    const pnl   =document.getElementById('m-pnl').textContent;
+    const util  =document.getElementById('m-util').textContent;
+    const totalCash=document.getElementById('cash-total-sum').textContent;
+
+    const posDetails=latestRowData.filter(r=>r.valid).map(r=>{
+      const ticker=(document.getElementById('ticker_'+r.id)||{}).value||'Unnamed';
+      const longFin =parseFloat((document.getElementById('longFin_'+r.id)||{}).value)||0;
+      const shortFin=parseFloat((document.getElementById('shortFin_'+r.id)||{}).value)||0;
+      const finRate =r.dir==='Long'?longFin:shortFin;
+      const dailyFin=!isNaN(r.mv_pos)?(finRate/100)*r.mv_pos/360:0;
+      const leverage=!isNaN(r.mv_pos)&&r.mv_pos>0&&!isNaN(r.im_pos)&&r.im_pos>0?(r.mv_pos/r.im_pos).toFixed(1):'N/A';
+      return `• ${ticker} | ${r.dir} | CCY: ${r.posCcy} | Entry: ${r.entry||'N/A'} | Current: ${r.current||'N/A'} | Qty: ${r.qty||'N/A'} | MktVal: ${!isNaN(r.mv_pos)?fmt(r.mv_pos):'N/A'} ${r.posCcy} | P&L: ${!isNaN(r.pnl_pos)?(r.pnl_pos>=0?'+':'')+fmt(r.pnl_pos)+' '+r.posCcy:'N/A'} | IM: ${!isNaN(r.im_pos)?fmt(r.im_pos)+' '+r.posCcy:'N/A'} | Leverage: ${leverage}x | FinRate: ${finRate}%/yr | DailyFinCost: ${fmt(dailyFin,4)} ${r.posCcy}`;
+    }).join('\n');
+
+    if(!posDetails){
+      const output=document.getElementById('portfolio-output');
+      output.textContent='No valid positions found. Please add at least one complete position before running analysis.';
+      output.style.display='block';
+      document.getElementById('portfolio-placeholder').style.display='none';
+      return;
+    }
+
+    const prompt=`You are a professional CFD (Contract for Difference) portfolio risk analyst specialising in leveraged retail trading. Analyse this CGSI Singapore CFD portfolio thoroughly from first principles. Be direct, specific with numbers, and practical.
+
+PORTFOLIO SNAPSHOT (Summary currency: ${sumCcy}):
+Total cash deposited: ${totalCash}
+Gross Liquidation Value (GLV): ${glv}
+Total Initial Margin (MTM): ${im}
+Free Equity (FE): ${fe}
+Unused cash: ${unused}
+Total market value of open positions: ${tmv}
+Total unrealised P&L: ${pnl}
+Margin utilisation: ${util}
+
+OPEN POSITIONS:
+${posDetails}
+
+Provide a structured analysis with these exact sections:
+
+1. LEVERAGE RISK VS CASH DEPOSITED
+Calculate effective leverage (total market exposure divided by cash deposited). Is this appropriate or excessive for a retail CFD trader? What percentage adverse price move across the portfolio would bring FE to zero and trigger a margin call?
+
+2. MARGIN CALL RISK ASSESSMENT
+Rate the risk as LOW / MEDIUM / HIGH / CRITICAL. For each position, estimate what price level would trigger a margin call if only that position moved adversely. Which position poses the greatest margin call risk?
+
+3. FREE EQUITY BUFFER HEALTH
+Rate as SAFE / WARNING / CRITICAL. Express FE as a percentage of total market exposure and total cash. How much buffer does the trader have?
+
+4. REWARD VS RISK RATIO
+Given current positions, entry prices, and current prices, what is the potential upside vs the risk of margin call? Is the reward worth the financing cost and leverage risk?
+
+5. FINANCING COST SUSTAINABILITY
+Calculate estimated monthly total financing cost across all positions. What percentage of the cash deposited does this represent annually? How many months can this be sustained if positions are flat?
+
+6. POSITION CONCENTRATION AND DIRECTION BIAS
+Is there dangerous concentration in a single stock, sector, or direction? What is the net long/short market exposure bias?
+
+7. PRIORITY ACTION ITEMS
+Provide exactly 5 specific, ranked, immediately actionable recommendations to improve the risk profile of this portfolio. Be concrete — name specific positions, amounts, and actions.`;
+
+    await callPollinations(prompt,'portfolio-loading','portfolio-placeholder','portfolio-output','btn-portfolio','Analyse portfolio');
+  }
+
+  async function runStockAnalysis(){
+    const sel=document.getElementById('stock-select');
+    const id=parseInt(sel.value);
+    if(isNaN(id)){ alert('Please select a position first.'); return; }
+    const rd=latestRowData.find(r=>r.id===id);
+    if(!rd){ alert('Position data not found.'); return; }
+    const ticker=(document.getElementById('ticker_'+id)||{}).value?.trim();
+    const exch  =(document.getElementById('exch_'+id)||{}).value||'US';
+    if(!ticker){ alert('No ticker symbol for this position.'); return; }
+
+    const exchCode=EXCHANGES.find(e=>e.label===exch)?.code||'';
+    const fullSymbol=exchCode?`${ticker} listed on ${exchCode}`:`${ticker} listed on US markets (NYSE/NASDAQ)`;
+
+    const prompt=`You are a senior equity analyst. Provide a comprehensive investment analysis of ${fullSymbol} for a CFD trader who currently holds the following position:
+
+Position details:
+- Direction: ${rd.dir}
+- Entry price: ${rd.entry||'N/A'} ${rd.posCcy}
+- Current price: ${rd.current||'N/A'} ${rd.posCcy}
+- Quantity: ${rd.qty||'N/A'} shares/contracts
+- Unrealised P&L: ${!isNaN(rd.pnl_pos)?(rd.pnl_pos>=0?'+':'')+fmt(rd.pnl_pos)+' '+rd.posCcy:'N/A'}
+- Current market value: ${!isNaN(rd.mv_pos)?fmt(rd.mv_pos)+' '+rd.posCcy:'N/A'}
+
+Provide analysis in these exact sections:
+
+1. COMPANY & BUSINESS OVERVIEW
+Brief overview of what the company does, its market position, key products/services, and revenue model. Include latest known revenue and profitability metrics.
+
+2. MARKET NARRATIVE & CURRENT THESIS
+What is the dominant bull and bear case for this stock right now? What is the market's primary focus and concern? What has been driving the stock price recently?
+
+3. SHORT-TERM VIEW (1-4 WEEKS)
+Technical outlook: key support and resistance levels, momentum indicators. Fundamental near-term catalysts (earnings, product launches, macro events). Expected price range in the next 1-4 weeks.
+
+4. LONG-TERM VIEW (6-12 MONTHS)
+Fundamental outlook: revenue growth trajectory, margin expansion/compression, competitive position changes. Key macro tailwinds and headwinds. Where do you see the stock in 6-12 months and why?
+
+5. ANALYST CONSENSUS & PRICE TARGETS
+Based on your knowledge: what is the general analyst consensus (Strong Buy / Buy / Hold / Sell / Strong Sell)? What is the typical price target range cited by analysts? What is the average/median target? Note if your training data may not reflect the most current targets.
+
+6. KEY RISKS FOR THIS POSITION
+List the top 5 specific risks that could move the stock against the trader's ${rd.dir} CFD position. Be specific to this company and current market conditions.
+
+7. CFD POSITION ASSESSMENT
+Given the trader entered at ${rd.entry||'N/A'} ${rd.posCcy} and is currently ${rd.dir}, provide:
+- Assessment of the entry price quality (good / fair / poor entry and why)
+- Current reward/risk ratio from current price levels
+- Clear recommendation: HOLD / ADD MORE / REDUCE POSITION / EXIT — with specific reasoning
+- If holding, what price level should trigger a stop-loss?
+- What is a realistic profit target?`;
+
+    await callPollinations(prompt,'stock-loading','stock-placeholder','stock-output','btn-stock','Analyse stock');
+  }
+
+  // ── Cash & FX grid ────────────────────────────────────
   function renderCashGrid(){
     const grid=document.getElementById('cash-grid'); grid.innerHTML='';
     CASH_CCYS.forEach(ccy=>{
@@ -505,15 +736,17 @@
   }
 
   function renderFxGrid(){
-    const base=getFxBase(); const prev={};
+    const base=getFxBase();
+    const prev={};
     CCYS.forEach(ccy=>{ if(ccy===base) return; const el=document.getElementById(fxId(ccy,base)); if(el) prev[fxId(ccy,base)]=el.value; });
     const grid=document.getElementById('fx-grid'); grid.innerHTML='';
     CCYS.forEach(ccy=>{
       const card=document.createElement('div'); card.className='fx-card';
-      if(ccy===base){ card.innerHTML=`<div class="fx-pair">${ccy} → ${base}</div><div class="fx-same">1.0000</div>`; }
-      else{
+      if(ccy===base){
+        card.innerHTML=`<div class="fx-pair">${ccy} → ${base}</div><div class="fx-same">1.0000</div>`;
+      } else {
         const key=fxId(ccy,base);
-        const defVal=DEFAULT_FX[base]?.[ccy]!=null?DEFAULT_FX[base][ccy].toFixed(4):'1.0000';
+        const defVal=DEFAULT_FX[base]?.[ccy]!=null?DEFAULT_FX[base][ccy].toFixed(ccy==='JPY'||base==='JPY'?4:4):'1.0000';
         card.innerHTML=`<div class="fx-pair">${ccy} → ${base}</div>
           <input type="number" class="fx-inp" id="${key}" value="${prev[key]||defVal}" min="0" step="0.0001" oninput="calc()">
           <span class="fx-live-badge" id="fx_live_${ccy}" style="display:none"></span>`;
@@ -522,6 +755,7 @@
     });
   }
 
+  // ── Row management ────────────────────────────────────
   function addRow(){
     if(rows.length>=10) return;
     const id=nextId++;
@@ -543,9 +777,9 @@
     rows.forEach(r=>{
       const tr=document.createElement('tr'); tr.id='row_'+r.id;
       const exchOpts=EXCHANGES.map(e=>`<option${e.label===r.exch?' selected':''}>${e.label}</option>`).join('');
-      const ccyOpts =CCYS.map(c=>`<option${c===r.ccy?' selected':''}>${c}</option>`).join('');
+      const ccyOpts =POS_CCYS.map(c=>`<option${c===r.ccy?' selected':''}>${c}</option>`).join('');
       tr.innerHTML=`
-        <td style="min-width:160px"><input type="text" id="ticker_${r.id}" value="${r.ticker}" placeholder="e.g. TSLA" oninput="updateField(${r.id},'ticker',this.value);calcFin()"></td>
+        <td style="min-width:160px"><input type="text" id="ticker_${r.id}" value="${r.ticker}" placeholder="e.g. TSLA" oninput="updateField(${r.id},'ticker',this.value);calcFin();updateStockDd()"></td>
         <td style="min-width:200px"><select id="exch_${r.id}" onchange="onExchChange(${r.id},this.value)">${exchOpts}</select></td>
         <td style="min-width:120px"><select id="ccy_${r.id}" onchange="updateField(${r.id},'ccy',this.value);calc()">${ccyOpts}</select></td>
         <td class="computed" id="fxshow_${r.id}" style="color:var(--text-secondary)">—</td>
@@ -575,11 +809,26 @@
     });
     document.getElementById('btn-add').style.display=rows.length>=10?'none':'inline-block';
     document.getElementById('row-count').textContent=rows.length>0?`${rows.length} / 10 positions`:'';
+    updateStockDd();
+  }
+
+  function updateStockDd(){
+    const sel=document.getElementById('stock-select');
+    const prev=sel.value; sel.innerHTML='<option value="">— select position —</option>';
+    latestRowData.filter(r=>r.valid).forEach(r=>{
+      const t=(document.getElementById('ticker_'+r.id)||{}).value||`Position ${r.id+1}`;
+      const opt=document.createElement('option'); opt.value=r.id;
+      opt.textContent=`${t} (${r.dir} · ${r.posCcy})`;
+      if(String(r.id)===String(prev)) opt.selected=true;
+      sel.appendChild(opt);
+    });
+    if(!sel.value && latestRowData.filter(r=>r.valid).length>0) sel.value=latestRowData.filter(r=>r.valid)[0].id;
   }
 
   function fmt(n,dp=2){ if(isNaN(n)||!isFinite(n)) return '—'; return n.toLocaleString('en-US',{minimumFractionDigits:dp,maximumFractionDigits:dp}); }
   function pnlClass(v){ return 'computed '+(v>0?'pnl-pos':v<0?'pnl-neg':'pnl-zero'); }
 
+  // ── Financing ─────────────────────────────────────────
   function updateFinDropdown(){
     const sel=document.getElementById('fin-pos-select'); const prevId=sel.value; sel.innerHTML='';
     const valid=latestRowData.filter(r=>r.valid);
@@ -588,6 +837,7 @@
     valid.forEach(r=>{ const opt=document.createElement('option'); opt.value=r.id; const t=(document.getElementById('ticker_'+r.id)||{}).value||`Pos ${r.id+1}`; opt.textContent=`${t||'Unnamed'} (${r.posCcy} · ${r.dir})`; if(String(r.id)===String(prevId)) opt.selected=true; sel.appendChild(opt); });
     calcFin();
   }
+
   function calcFin(){
     const sel=document.getElementById('fin-pos-select'); if(!sel||!sel.value) return;
     const id=parseInt(sel.value); const rd=latestRowData.find(r=>r.id===id); if(!rd||!rd.valid) return;
@@ -616,138 +866,27 @@
     document.getElementById('fin-formula').textContent=`Formula: ${rate}% × ${rd.posCcy} ${fmt(mv)} ÷ 360 = ${rd.posCcy} ${fmt(dp,4)} / day`+(totalDays>0?` · ${totalDays} days = ${rd.posCcy} ${fmt(tp,2)}`:'');
   }
 
-  // ── Claude AI Analysis ────────────────────────────────
-  async function runAiAnalysis(){
-    const btn=document.getElementById('btn-ai');
-    const output=document.getElementById('ai-output');
-    const loading=document.getElementById('ai-loading');
-    const sumCcy=getSumCcy();
-
-    const glv   =document.getElementById('m-glv').textContent;
-    const im    =document.getElementById('m-im').textContent;
-    const fe    =document.getElementById('m-fe').textContent;
-    const unused=document.getElementById('m-unused').textContent;
-    const tmv   =document.getElementById('m-tmv').textContent;
-    const pnl   =document.getElementById('m-pnl').textContent;
-    const util  =document.getElementById('m-util').textContent;
-    const totalCash=document.getElementById('cash-total-sum').textContent;
-
-    const posDetails=latestRowData.filter(r=>r.valid).map(r=>{
-      const ticker=(document.getElementById('ticker_'+r.id)||{}).value||'Unnamed';
-      const longFin =parseFloat((document.getElementById('longFin_'+r.id)||{}).value)||0;
-      const shortFin=parseFloat((document.getElementById('shortFin_'+r.id)||{}).value)||0;
-      const finRate =r.dir==='Long'?longFin:shortFin;
-      const dailyFin=!isNaN(r.mv_pos)?(finRate/100)*r.mv_pos/360:0;
-      return `- ${ticker} (${r.dir}, ${r.posCcy}): Entry=${r.entry||'N/A'}, Current=${r.current||'N/A'}, Qty=${r.qty||'N/A'}, MktVal=${!isNaN(r.mv_pos)?fmt(r.mv_pos):'N/A'} ${r.posCcy}, P&L=${!isNaN(r.pnl_pos)?(r.pnl_pos>=0?'+':'')+fmt(r.pnl_pos)+' '+r.posCcy:'N/A'}, IM=${!isNaN(r.im_pos)?fmt(r.im_pos)+' '+r.posCcy:'N/A'}, FinRate=${finRate}%/yr, DailyFinCost≈${fmt(dailyFin,4)} ${r.posCcy}`;
-    }).join('\n');
-
-    if(!posDetails){
-      output.classList.remove('placeholder');
-      output.textContent='No valid positions found. Add at least one complete position before running analysis.';
-      return;
-    }
-
-    const prompt=`You are a CFD (Contract for Difference) portfolio risk analyst specialising in CGSI Singapore CFD products. Analyse the following portfolio from first principles and provide clear, structured, actionable insights.
-
-PORTFOLIO SNAPSHOT (Summary currency: ${sumCcy}):
-- Total cash deposited: ${totalCash}
-- Gross Liquidation Value (GLV): ${glv}
-- Total Initial Margin (MTM): ${im}
-- Free Equity (FE): ${fe}
-- Unused cash: ${unused}
-- Total market value: ${tmv}
-- Total unrealised P&L: ${pnl}
-- Margin utilisation: ${util}
-
-OPEN POSITIONS:
-${posDetails}
-
-Provide a structured analysis covering:
-
-1. MARGIN CALL RISK
-How close is the portfolio to a margin call (FE = 0)? What price moves would trigger it?
-
-2. FREE EQUITY BUFFER HEALTH
-Is the FE buffer healthy, concerning, or critical? What % of total exposure does it represent?
-
-3. POSITION CONCENTRATION
-Is the portfolio well-diversified or overly concentrated in any single position or direction?
-
-4. FINANCING COST BURDEN
-Estimate the monthly financing cost burden vs portfolio value. Is it sustainable long-term?
-
-5. LONG VS SHORT EXPOSURE
-What is the net directional bias and associated risks?
-
-6. SUGGESTED ACTIONS
-Provide 3–5 specific, prioritised, actionable recommendations to improve the portfolio's risk profile.
-
-Be direct, concise, and practical. Highlight any critical risks clearly. Use plain language suitable for a retail CFD trader.`;
-
-    btn.disabled=true; btn.textContent='Analysing…';
-    output.style.display='none';
-    loading.style.display='flex';
-
-    try{
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': CLAUDE_KEY,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: CLAUDE_MODEL,
-          max_tokens: 1500,
-          messages: [{ role: 'user', content: prompt }]
-        })
-      });
-
-      const data = await response.json();
-
-      if(data.content && data.content[0] && data.content[0].text){
-        output.classList.remove('placeholder');
-        output.textContent = data.content[0].text.trim();
-        output.style.display = 'block';
-      } else if(data.error){
-        output.classList.remove('placeholder');
-        output.textContent = `Claude API error: ${data.error.message||'Unknown error'}`;
-        output.style.display = 'block';
-      } else {
-        throw new Error('Unexpected response format');
-      }
-    }catch(e){
-      output.classList.remove('placeholder');
-      output.textContent = `Analysis failed: ${e.message}.\n\nNote: Direct browser calls to the Anthropic API may be blocked by CORS on some hosting environments. The calculator is working correctly — this is a network restriction.`;
-      output.style.display = 'block';
-    }finally{
-      loading.style.display='none';
-      btn.disabled=false; btn.textContent='Analyse portfolio';
-    }
-  }
-
   // ── Main calc ─────────────────────────────────────────
   function calc(){
     const base=getFxBase(), sumCcy=getSumCcy();
     document.getElementById('summary-label').textContent=`Account summary (${sumCcy})`;
     const mvSumTh=document.getElementById('mv-sum-th'); const pnlSumTh=document.getElementById('pnl-sum-th');
-    if(mvSumTh)  mvSumTh.textContent =`Mkt val (${sumCcy})`;
+    if(mvSumTh)  mvSumTh.textContent=`Mkt val (${sumCcy})`;
     if(pnlSumTh) pnlSumTh.textContent=`P&L (${sumCcy})`;
 
     let totalCashBase=0; const cashParts=[];
     CASH_CCYS.forEach(ccy=>{
       const amt=cashValues[ccy]||0;
-      const fx=ccy==='JPY'?getJpyToBase():getFxRate(ccy,base);
+      const fx=getFxRate(ccy,base);
       const inBase=amt*fx; totalCashBase+=inBase;
       const convEl=document.getElementById('cash-conv-'+ccy);
       if(convEl) convEl.textContent=(amt>0&&ccy!==base)?`= ${base} ${fmt(inBase)} @ ${fmt(fx,4)}`:'';
       if(amt>0) cashParts.push(`${ccy} ${fmt(amt,0)}`);
     });
     const cashInSum=totalCashBase*getFxRate(base,sumCcy);
-    document.getElementById('cash-total-base').textContent =base+' '+fmt(totalCashBase);
+    document.getElementById('cash-total-base').textContent=base+' '+fmt(totalCashBase);
     document.getElementById('cash-total-break').textContent=cashParts.length>1?'( '+cashParts.join(' + ')+' )':'';
-    document.getElementById('cash-total-sum').textContent  =sumCcy+' '+fmt(cashInSum);
+    document.getElementById('cash-total-sum').textContent=sumCcy+' '+fmt(cashInSum);
 
     let totalIM_base=0, totalPnL_base=0, totalMV_base=0;
     const rowData=[];
@@ -771,7 +910,7 @@ Be direct, concise, and practical. Highlight any critical risks clearly. Use pla
       if(!isNaN(im_base))  totalIM_base +=im_base;
       if(!isNaN(pnl_base)) totalPnL_base+=pnl_base;
       if(!isNaN(mv_base))  totalMV_base +=mv_base;
-      rowData.push({id:r.id,posCcy,fxToBase,fxToSum,dir,entry:entry,current:hasCurrent?current:null,qty,mv_pos,mv_sum,im_pos,im_sum,pnl_pos,pnl_sum,valid,hasCurrent});
+      rowData.push({id:r.id,posCcy,fxToBase,fxToSum,dir,entry,current:hasCurrent?current:null,qty,mv_pos,mv_sum,im_pos,im_sum,pnl_pos,pnl_sum,valid,hasCurrent});
     });
     latestRowData=rowData;
 
@@ -807,11 +946,13 @@ Be direct, concise, and practical. Highlight any critical risks clearly. Use pla
       if(pnlPosEl){ if(!isNaN(r.pnl_pos)){pnlPosEl.textContent=(r.pnl_pos>=0?'+':'')+r.posCcy+' '+fmt(r.pnl_pos);pnlPosEl.className=pnlClass(r.pnl_pos);}else{pnlPosEl.textContent='—';pnlPosEl.className='computed pnl-zero';} }
       if(pnlSumEl){ if(!isNaN(r.pnl_sum)){pnlSumEl.textContent=(r.pnl_sum>=0?'+':'')+sumCcy+' '+fmt(r.pnl_sum);pnlSumEl.className=pnlClass(r.pnl_sum);}else{pnlSumEl.textContent='—';pnlSumEl.className='computed pnl-zero';} }
     });
+
     updateFinDropdown();
+    updateStockDd();
   }
 
   // Init
-  document.getElementById('td-api-key').value = TD_KEY;
+  document.getElementById('td-api-key').value=TD_KEY;
   renderCashGrid(); renderFxGrid(); calc(); addRow();
 </script>
 </body>
