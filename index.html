@@ -488,7 +488,7 @@
       const card = document.createElement('div');
       card.className = 'cash-card';
       card.innerHTML = `
-        <div class="cash-card-label">${ccy}${ccy==='JPY'?' <span style="font-size:10px;color:var(--text-warning)">cash only</span>':''}</div>
+        <div class="cash-card-label">${ccy}${ccy==='JPY'?'
         <input type="number" class="cash-inp" id="cash_${ccy}"
           value="${cashValues[ccy]||0}" min="0" step="100" placeholder="0"
           oninput="cashValues['${ccy}']=parseFloat(this.value)||0;calc()">
