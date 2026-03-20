@@ -25,15 +25,12 @@
     }
     body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg-tertiary); color:var(--text); font-size:15px; line-height:1.5; min-height:100vh; }
     .page { max-width:1480px; margin:0 auto; padding:2rem 1.5rem 4rem; }
-
-    /* Header */
     .header { margin-bottom:2rem; }
     .header h1 { font-size:22px; font-weight:600; }
     .header h1 .version { font-size:14px; font-weight:400; color:var(--text-tertiary); }
     .header h1 .creator { font-size:14px; font-weight:400; color:var(--text-secondary); }
-    .header p  { font-size:13px; color:var(--text-secondary); margin-top:4px; }
+    .header p { font-size:13px; color:var(--text-secondary); margin-top:4px; }
     .badge { display:inline-block; margin-top:8px; font-size:11px; padding:3px 10px; background:var(--bg-success); color:var(--text-success); border-radius:20px; font-weight:500; }
-
     .card { background:var(--bg); border:0.5px solid var(--border); border-radius:var(--radius-lg); padding:1.25rem 1.5rem; margin-bottom:1.25rem; }
     .section-label { font-size:11px; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:12px; }
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:1.25rem; }
@@ -43,8 +40,6 @@
     .panel-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .panel-row label { font-size:13px; color:var(--text-secondary); white-space:nowrap; }
     .panel-hint { font-size:11px; color:var(--text-tertiary); margin-top:6px; }
-
-    /* API card — collapsed by default */
     .api-card { background:var(--bg-secondary); border:0.5px solid var(--border); border-radius:var(--radius-lg); margin-bottom:1.25rem; overflow:hidden; }
     .api-card-header { display:flex; align-items:center; justify-content:space-between; padding:10px 1.25rem; cursor:pointer; user-select:none; }
     .api-card-header:hover { background:var(--bg-tertiary); }
@@ -68,15 +63,12 @@
     .api-status.ok   { color:var(--text-success); }
     .api-status.err  { color:var(--text-danger); }
     .api-status.info { color:var(--text-tertiary); }
-
-    /* Exchange guide */
     .exch-guide { background:var(--bg); border-radius:var(--radius-md); padding:10px 14px; margin-top:10px; border:0.5px solid var(--border); }
     .exch-guide-title { font-size:11px; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px; }
     .exch-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
     @media(max-width:700px){ .exch-grid { grid-template-columns:repeat(2,1fr); } }
     .exch-item { font-size:11px; color:var(--text-secondary); line-height:1.5; }
     .exch-item strong { color:var(--text); }
-
     .cash-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; margin-bottom:12px; }
     @media(max-width:700px){ .cash-grid { grid-template-columns:repeat(2,1fr); } }
     .cash-card { background:var(--bg-secondary); border-radius:var(--radius-md); padding:12px 14px; }
@@ -84,29 +76,26 @@
     .cash-converted { font-size:11px; color:var(--text-tertiary); margin-top:5px; min-height:16px; }
     .cash-total { display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:10px 14px; background:var(--bg-secondary); border-radius:var(--radius-md); margin-top:4px; }
     .cash-total-label { font-size:13px; color:var(--text-secondary); }
-    .cash-total-val   { font-size:15px; font-weight:600; color:var(--text); }
+    .cash-total-val { font-size:15px; font-weight:600; color:var(--text); }
     .cash-total-break { font-size:12px; color:var(--text-tertiary); }
-
     .fx-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
     @media(max-width:640px){ .fx-grid { grid-template-columns:repeat(2,1fr); } }
     .fx-card { background:var(--bg-secondary); border-radius:var(--radius-md); padding:10px 12px; }
     .fx-pair { font-size:11px; font-weight:600; color:var(--text-tertiary); margin-bottom:5px; text-transform:uppercase; letter-spacing:0.05em; }
     .fx-same { font-size:14px; font-weight:600; color:var(--text-tertiary); padding:5px 0; }
     .fx-live-badge { font-size:10px; color:var(--text-success); font-weight:600; display:block; margin-top:3px; }
-
     .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-bottom:1.25rem; }
     @media(max-width:900px){ .metrics { grid-template-columns:repeat(2,1fr); } }
     .metric { background:var(--bg-secondary); border-radius:var(--radius-md); padding:12px 14px; }
     .metric-label { font-size:12px; color:var(--text-secondary); margin-bottom:4px; }
     .metric-value { font-size:18px; font-weight:600; color:var(--text); }
-    .metric-value.danger  { color:var(--text-danger); }
+    .metric-value.danger { color:var(--text-danger); }
     .metric-value.success { color:var(--text-success); }
-    .metric-value.warn    { color:var(--text-warning); }
-    .metric-value.info    { color:var(--text-info); }
+    .metric-value.warn { color:var(--text-warning); }
+    .metric-value.info { color:var(--text-info); }
     .fe-bar-bg { height:8px; background:var(--bg-secondary); border-radius:4px; overflow:hidden; margin-top:8px; margin-bottom:6px; }
     .fe-bar-fill { height:100%; border-radius:4px; transition:width 0.25s,background 0.25s; }
     .fe-bar-note { font-size:12px; color:var(--text-tertiary); }
-
     .table-wrap { overflow-x:auto; }
     table { width:100%; border-collapse:collapse; font-size:13px; min-width:1500px; }
     th { font-size:11px; font-weight:600; color:var(--text-tertiary); text-align:left; padding:7px 8px; border-bottom:0.5px solid var(--border); white-space:nowrap; background:var(--bg-secondary); }
@@ -122,8 +111,8 @@
     .cash-inp:focus,.fx-inp:focus { border-color:#378add; box-shadow:0 0 0 2px rgba(55,138,221,0.15); }
     select.base-sel { width:auto; padding:8px 10px; font-size:14px; }
     .computed { font-size:13px; color:var(--text); white-space:nowrap; }
-    .pnl-pos  { color:var(--text-success); }
-    .pnl-neg  { color:var(--text-danger); }
+    .pnl-pos { color:var(--text-success); }
+    .pnl-neg { color:var(--text-danger); }
     .pnl-zero { color:var(--text-secondary); }
     .tag-conv { font-size:11px; color:var(--text-tertiary); display:block; margin-top:2px; }
     .mtm-note { font-size:11px; color:var(--text-warning); display:block; margin-top:2px; }
@@ -136,8 +125,6 @@
     .btn-del { width:28px; height:28px; border:none; background:transparent; color:var(--text-tertiary); cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; border-radius:var(--radius-sm); transition:background 0.15s; }
     .btn-del:hover { background:var(--bg-danger); color:var(--text-danger); }
     .row-count { font-size:12px; color:var(--text-tertiary); margin-top:6px; }
-
-    /* Financing */
     .fin-card { background:var(--bg); border:0.5px solid var(--border); border-radius:var(--radius-lg); padding:1.25rem 1.5rem; margin-bottom:1.25rem; border-top:3px solid #378add; }
     .fin-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:12px; align-items:end; margin-bottom:1.25rem; }
     @media(max-width:860px){ .fin-top { grid-template-columns:1fr 1fr; } }
@@ -159,31 +146,29 @@
     @media(max-width:640px){ .fin-results { grid-template-columns:repeat(2,1fr); } }
     .fin-result-card { background:var(--bg-info); border-radius:var(--radius-md); padding:12px 14px; border:0.5px solid rgba(55,138,221,0.2); }
     .fin-result-label { font-size:12px; color:var(--text-info); margin-bottom:6px; font-weight:500; }
-    .fin-result-val   { font-size:18px; font-weight:600; color:var(--text-info); }
-    .fin-result-sub   { font-size:12px; color:var(--text-secondary); margin-top:4px; }
+    .fin-result-val { font-size:18px; font-weight:600; color:var(--text-info); }
+    .fin-result-sub { font-size:12px; color:var(--text-secondary); margin-top:4px; }
     .fin-formula { font-size:11px; color:var(--text-tertiary); background:var(--bg-secondary); border-radius:var(--radius-md); padding:8px 12px; margin-top:1rem; line-height:1.6; }
     .fin-no-pos { text-align:center; padding:2rem; font-size:14px; color:var(--text-tertiary); }
-
-    /* AI Analysis */
-    .ai-card { background:var(--bg); border:0.5px solid var(--border); border-radius:var(--radius-lg); padding:1.25rem 1.5rem; margin-bottom:1.25rem; border-top:3px solid #7f77dd; }
+    /* AI */
+    .ai-card { background:var(--bg); border:0.5px solid var(--border); border-radius:var(--radius-lg); padding:1.25rem 1.5rem; margin-bottom:1.25rem; border-top:3px solid #d4820a; }
     .ai-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:1rem; }
-    .ai-title { font-size:11px; font-weight:600; color:#534ab7; text-transform:uppercase; letter-spacing:0.07em; }
+    .ai-title { font-size:11px; font-weight:600; color:#d4820a; text-transform:uppercase; letter-spacing:0.07em; }
     .ai-subtitle { font-size:12px; color:var(--text-tertiary); margin-top:3px; }
-    .btn-ai { padding:10px 20px; border:none; border-radius:var(--radius-md); background:#7f77dd; color:#fff; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; transition:background 0.15s; }
-    .btn-ai:hover { background:#534ab7; }
+    .btn-ai { padding:10px 20px; border:none; border-radius:var(--radius-md); background:#d4820a; color:#fff; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; transition:background 0.15s; }
+    .btn-ai:hover { background:#b36d08; }
     .btn-ai:disabled { opacity:0.5; cursor:not-allowed; }
-    .ai-output { background:var(--bg-secondary); border-radius:var(--radius-md); padding:1rem 1.25rem; margin-top:1rem; font-size:14px; line-height:1.8; color:var(--text); min-height:60px; white-space:pre-wrap; }
-    .ai-output.placeholder { color:var(--text-tertiary); font-size:13px; }
+    .ai-sections { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-bottom:1rem; }
+    @media(max-width:700px){ .ai-sections { grid-template-columns:1fr; } }
+    .ai-section-tag { font-size:11px; padding:4px 10px; border-radius:20px; background:rgba(212,130,10,0.10); color:#b36d08; font-weight:500; text-align:center; }
     .ai-loading { display:flex; align-items:center; gap:10px; color:var(--text-tertiary); font-size:13px; margin-top:1rem; }
-    .ai-loading-dot { width:8px; height:8px; border-radius:50%; background:#7f77dd; animation:pulse 1.2s infinite; }
+    .ai-loading-dot { width:8px; height:8px; border-radius:50%; background:#d4820a; animation:pulse 1.2s infinite; }
     .ai-loading-dot:nth-child(2){ animation-delay:0.2s; }
     .ai-loading-dot:nth-child(3){ animation-delay:0.4s; }
     @keyframes pulse { 0%,100%{opacity:0.3;transform:scale(0.8)} 50%{opacity:1;transform:scale(1)} }
+    .ai-output { background:var(--bg-secondary); border-radius:var(--radius-md); padding:1rem 1.25rem; margin-top:1rem; font-size:14px; line-height:1.8; color:var(--text); min-height:60px; white-space:pre-wrap; }
+    .ai-output.placeholder { color:var(--text-tertiary); font-size:13px; }
     .ai-disclaimer { font-size:11px; color:var(--text-tertiary); margin-top:8px; }
-    .ai-sections { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-bottom:1rem; }
-    @media(max-width:700px){ .ai-sections { grid-template-columns:1fr; } }
-    .ai-section-tag { font-size:11px; padding:4px 10px; border-radius:20px; background:rgba(127,119,221,0.12); color:#534ab7; font-weight:500; text-align:center; }
-
     .divider-label { display:flex; align-items:center; gap:12px; margin:2rem 0 1.25rem; }
     .divider-label span { font-size:13px; font-weight:500; color:var(--text-secondary); white-space:nowrap; }
     .divider-label::before,.divider-label::after { content:''; flex:1; height:0.5px; background:var(--border); }
@@ -193,14 +178,13 @@
 <body>
 <div class="page">
 
-  <!-- Header -->
   <div class="header">
     <h1>CGSI CFD Margin Calculator <span class="version">(v1.3)</span> <span class="creator">— created by Joon</span></h1>
     <p>Based on Contract for Difference (CGSI Singapore) mechanism.</p>
-    <span class="badge">Multi-currency · Up to 10 positions · MTM margin · Live data · AI analysis</span>
+    <span class="badge">Multi-currency · Up to 10 positions · MTM margin · Live data · Claude AI analysis</span>
   </div>
 
-  <!-- API key — collapsed/hidden by default -->
+  <!-- Data settings (collapsed) -->
   <div class="api-card" id="api-card">
     <div class="api-card-header" onclick="toggleApiCard()">
       <span class="api-card-title">Data settings (stock price API)</span>
@@ -210,14 +194,13 @@
       <div class="api-row">
         <label>Twelve Data API key</label>
         <div class="api-key-wrap">
-          <input type="text" class="api-inp" id="td-api-key" value="5843b68ae53749aa8a949d5706b9660c" autocomplete="off">
-          <button class="btn-eye" onclick="toggleKeyVisibility()" title="Show/hide key" id="btn-eye">👁</button>
+          <input type="text" class="api-inp" id="td-api-key" autocomplete="off">
+          <button class="btn-eye" onclick="toggleKeyVisibility('td-api-key')" title="Show/hide">👁</button>
         </div>
         <button class="btn-api" onclick="testApiKey()">Test key</button>
       </div>
-      <div class="api-hint">Free at <a href="https://twelvedata.com" target="_blank">twelvedata.com</a> — 800 calls/day, no credit card required.</div>
+      <div class="api-hint">Free at <a href="https://twelvedata.com" target="_blank">twelvedata.com</a> — 800 calls/day.</div>
       <div class="api-status info" id="api-status">Key pre-loaded.</div>
-
       <div class="exch-guide">
         <div class="exch-guide-title">Exchange codes &amp; ticker format</div>
         <div class="exch-grid">
@@ -260,10 +243,10 @@
     <div class="cash-grid" id="cash-grid"></div>
     <div class="cash-total">
       <span class="cash-total-label">Total cash (FX base)</span>
-      <span class="cash-total-val"   id="cash-total-base">—</span>
+      <span class="cash-total-val" id="cash-total-base">—</span>
       <span class="cash-total-break" id="cash-total-break"></span>
       <span style="margin-left:16px;font-size:13px;color:var(--text-secondary)">= Summary CCY:</span>
-      <span class="cash-total-val"   id="cash-total-sum">—</span>
+      <span class="cash-total-val" id="cash-total-sum">—</span>
     </div>
   </div>
 
@@ -274,7 +257,7 @@
       <button class="btn-api" onclick="fetchLiveFx()" id="btn-fx-refresh" style="font-size:12px;padding:6px 12px;">↻ Fetch live FX rates</button>
     </div>
     <div class="fx-grid" id="fx-grid"></div>
-    <div class="api-status info" id="fx-status" style="margin-top:8px">Click "Fetch live FX rates" to load ECB rates from frankfurter.app. All rates remain editable.</div>
+    <div class="api-status info" id="fx-status" style="margin-top:8px">Click "Fetch live FX rates" to load ECB rates from frankfurter.app. Rates remain editable.</div>
   </div>
 
   <!-- Account summary -->
@@ -308,7 +291,7 @@
             <th style="min-width:130px">Direction</th>
             <th>Entry price</th>
             <th>Current price</th>
-            <th>Qty</th>
+            <th style="min-width:144px">Qty</th>
             <th>Margin %</th>
             <th>Long fin. %</th>
             <th>Short fin. %</th>
@@ -335,38 +318,21 @@
     <div id="fin-no-pos" class="fin-no-pos">Add at least one position above to use this calculator.</div>
     <div id="fin-body" style="display:none">
       <div class="fin-top">
-        <div class="fin-field">
-          <label>Position</label>
-          <select id="fin-pos-select" onchange="calcFin()"></select>
-        </div>
-        <div class="fin-field">
-          <label>Direction</label>
-          <div id="fin-dir-display" style="padding:8px 10px;border:0.5px solid var(--border-md);border-radius:var(--radius-md);font-size:14px;color:var(--text-secondary);background:var(--bg-secondary)">—</div>
-        </div>
-        <div class="fin-field">
-          <label>Market value (pos. CCY)</label>
-          <div id="fin-mv-display" style="padding:8px 10px;border:0.5px solid var(--border-md);border-radius:var(--radius-md);font-size:14px;font-weight:600;color:var(--text);background:var(--bg-secondary)">—</div>
-        </div>
+        <div class="fin-field"><label>Position</label><select id="fin-pos-select" onchange="calcFin()"></select></div>
+        <div class="fin-field"><label>Direction</label><div id="fin-dir-display" style="padding:8px 10px;border:0.5px solid var(--border-md);border-radius:var(--radius-md);font-size:14px;color:var(--text-secondary);background:var(--bg-secondary)">—</div></div>
+        <div class="fin-field"><label>Market value (pos. CCY)</label><div id="fin-mv-display" style="padding:8px 10px;border:0.5px solid var(--border-md);border-radius:var(--radius-md);font-size:14px;font-weight:600;color:var(--text);background:var(--bg-secondary)">—</div></div>
         <div class="fin-field"><label>Months</label><input type="number" id="fin-months" value="1" min="0" step="1" oninput="calcFin()"></div>
         <div class="fin-field"><label>Days</label><input type="number" id="fin-days" value="0" min="0" step="1" oninput="calcFin()"></div>
       </div>
       <div class="fin-rates">
         <div class="fin-rate-card">
           <div class="fin-rate-label">Long financing rate</div>
-          <div class="fin-rate-row">
-            <label>Annual rate %</label>
-            <input type="number" id="fin-long-rate" value="3.50" min="0" step="0.01" oninput="calcFin()">
-            <span style="font-size:13px;color:var(--text-tertiary)">% p.a.</span>
-          </div>
+          <div class="fin-rate-row"><label>Annual rate %</label><input type="number" id="fin-long-rate" value="3.50" min="0" step="0.01" oninput="calcFin()"><span style="font-size:13px;color:var(--text-tertiary)">% p.a.</span></div>
           <div class="fin-rate-hint">Applied when direction is Long</div>
         </div>
         <div class="fin-rate-card">
           <div class="fin-rate-label">Short financing rate</div>
-          <div class="fin-rate-row">
-            <label>Annual rate %</label>
-            <input type="number" id="fin-short-rate" value="2.00" min="0" step="0.01" oninput="calcFin()">
-            <span style="font-size:13px;color:var(--text-tertiary)">% p.a.</span>
-          </div>
+          <div class="fin-rate-row"><label>Annual rate %</label><input type="number" id="fin-short-rate" value="2.00" min="0" step="0.01" oninput="calcFin()"><span style="font-size:13px;color:var(--text-tertiary)">% p.a.</span></div>
           <div class="fin-rate-hint">Applied when direction is Short</div>
         </div>
       </div>
@@ -382,17 +348,16 @@
     </div>
   </div>
 
-  <!-- AI Portfolio Analysis -->
+  <!-- AI Analysis -->
   <div class="divider-label"><span>AI portfolio analysis</span></div>
   <div class="ai-card">
     <div class="ai-header">
       <div>
-        <div class="ai-title">AI Portfolio Analyser — powered by Pollinations AI (free, no key needed)</div>
-        <div class="ai-subtitle">Analyses your current portfolio snapshot based on first principles</div>
+        <div class="ai-title">AI Portfolio Analyser — powered by Claude (Anthropic)</div>
+        <div class="ai-subtitle">Uses Claude AI to analyse your portfolio from first principles and provide actionable suggestions</div>
       </div>
       <button class="btn-ai" id="btn-ai" onclick="runAiAnalysis()">Analyse portfolio</button>
     </div>
-
     <div class="ai-sections">
       <div class="ai-section-tag">Margin call risk</div>
       <div class="ai-section-tag">Position concentration</div>
@@ -401,16 +366,14 @@
       <div class="ai-section-tag">Long vs short exposure</div>
       <div class="ai-section-tag">Suggested actions</div>
     </div>
-
     <div id="ai-loading" style="display:none" class="ai-loading">
       <div class="ai-loading-dot"></div>
       <div class="ai-loading-dot"></div>
       <div class="ai-loading-dot"></div>
-      <span>Analysing your portfolio…</span>
+      <span>Claude is analysing your portfolio…</span>
     </div>
-
-    <div class="ai-output placeholder" id="ai-output">Click "Analyse portfolio" to get an AI-powered first-principles analysis of your current positions, margin health, financing burden, and actionable suggestions.</div>
-    <div class="ai-disclaimer">This analysis is generated by an AI model (Pollinations AI / open-source LLM) and is for informational purposes only. It does not constitute financial advice. Always consult a licensed financial adviser before making investment decisions.</div>
+    <div class="ai-output placeholder" id="ai-output">Click "Analyse portfolio" to get a Claude AI first-principles analysis covering margin risk, position health, financing burden, and actionable suggestions.</div>
+    <div class="ai-disclaimer">Analysis is generated by Claude AI (Anthropic) and is for informational purposes only. It does not constitute financial advice. Always consult a licensed financial adviser before making investment decisions.</div>
   </div>
 
   <div class="footer">
@@ -419,7 +382,7 @@
     IM = Current Price × Qty × Margin % (MTM) &nbsp;|&nbsp; Financing = Rate % × Mkt Val ÷ 360<br>
     Live prices: <a href="https://twelvedata.com" target="_blank" style="color:var(--text-tertiary)">Twelve Data</a> &nbsp;·&nbsp;
     Live FX: <a href="https://frankfurter.app" target="_blank" style="color:var(--text-tertiary)">frankfurter.app</a> (ECB) &nbsp;·&nbsp;
-    AI: <a href="https://pollinations.ai" target="_blank" style="color:var(--text-tertiary)">Pollinations AI</a>
+    AI: <a href="https://anthropic.com" target="_blank" style="color:var(--text-tertiary)">Claude by Anthropic</a>
   </div>
 </div>
 
@@ -440,14 +403,19 @@
     USD:{ MYR:0.2551, SGD:0.7832, USD:1,      HKD:0.1276, JPY:0.0066 },
     HKD:{ MYR:2.00,   SGD:6.14,   USD:7.84,   HKD:1,      JPY:0.052  }
   };
-  const TD_API_KEY = '5843b68ae53749aa8a949d5706b9660c';
+
+  // Embedded API keys
+  const TD_KEY      = '5843b68ae53749aa8a949d5706b9660c';
+  const CLAUDE_KEY  = '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';
+  const CLAUDE_MODEL = 'claude-haiku-4-5-20251001';
+
   let rows=[], nextId=0, latestRowData=[];
   const cashValues={MYR:0,SGD:0,USD:0,HKD:0,JPY:0};
 
   function getFxBase(){ return document.getElementById('fx-base').value; }
   function getSumCcy(){ return document.getElementById('sum-ccy').value; }
-  function getTdKey(){ const v=document.getElementById('td-api-key').value.trim(); return v||TD_API_KEY; }
-  function fxId(f,t){ return `fx_${f}_${t}`; }
+  function getTdKey() { const v=document.getElementById('td-api-key').value.trim(); return v||TD_KEY; }
+  function fxId(f,t) { return `fx_${f}_${t}`; }
   function getFxRate(from,to){
     if(from===to) return 1;
     const base=getFxBase();
@@ -457,22 +425,19 @@
   }
   function getJpyToBase(){ return DEFAULT_FX[getFxBase()]?.JPY||1; }
 
-  // ── API card toggle ───────────────────────────────────
   function toggleApiCard(){
     const body=document.getElementById('api-card-body');
     const arrow=document.getElementById('api-card-arrow');
     const open=body.classList.toggle('open');
     arrow.textContent=open?'▲ hide':'▼ show';
   }
-  function toggleKeyVisibility(){
-    const inp=document.getElementById('td-api-key');
-    inp.classList.toggle('revealed');
+  function toggleKeyVisibility(id){
+    const inp=document.getElementById(id);
+    if(inp) inp.classList.toggle('revealed');
   }
 
-  // ── Twelve Data ───────────────────────────────────────
   async function testApiKey(){
-    const key=getTdKey();
-    if(!key){ setApiStatus('No key found.','info'); return; }
+    const key=getTdKey(); if(!key){ setApiStatus('No key found.','info'); return; }
     setApiStatus('Testing…','info');
     try{
       const r=await fetch(`https://api.twelvedata.com/price?symbol=AAPL&apikey=${key}`);
@@ -502,7 +467,7 @@
         const badge=document.getElementById('live_badge_'+id);
         if(badge){ badge.textContent=`● LIVE (${symbol})`; badge.style.display='block'; }
         calc();
-      } else { alert(`Could not fetch "${symbol}": ${d.message||'Unknown'}.\n\nCheck the ticker format in Data Settings above.`); }
+      } else { alert(`Could not fetch "${symbol}": ${d.message||'Unknown'}.\n\nCheck ticker format in Data Settings.`); }
     }catch(e){ alert('Network error.'); }
     finally{ if(btn){ btn.disabled=false; btn.textContent='↓ Fetch'; } }
   }
@@ -512,7 +477,7 @@
     const btn=document.getElementById('btn-fx-refresh');
     const status=document.getElementById('fx-status');
     if(btn){ btn.disabled=true; btn.textContent='Fetching…'; }
-    status.textContent='Fetching live FX rates…'; status.className='api-status info';
+    status.textContent='Fetching…'; status.className='api-status info';
     const symbols=CCYS.filter(c=>c!==base).join(',');
     try{
       const r=await fetch(`https://api.frankfurter.app/latest?from=${base}&to=${symbols}`);
@@ -520,7 +485,7 @@
       if(d.rates){
         CCYS.filter(c=>c!==base).forEach(ccy=>{ const rate=d.rates[ccy]; if(rate){ const el=document.getElementById(fxId(ccy,base)); if(el) el.value=(1/rate).toFixed(4); } });
         const ts=new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-        status.textContent=`Live FX loaded (ECB · ${ts}). Rates are editable.`; status.className='api-status ok';
+        status.textContent=`Live FX loaded (ECB · ${ts}). Editable.`; status.className='api-status ok';
         CCYS.filter(c=>c!==base).forEach(ccy=>{ const b=document.getElementById('fx_live_'+ccy); if(b){ b.textContent='● LIVE'; b.style.display='block'; } });
         calc();
       } else { status.textContent=`FX error: ${d.message||'Unknown'}`; status.className='api-status err'; }
@@ -528,35 +493,25 @@
     finally{ if(btn){ btn.disabled=false; btn.textContent='↻ Fetch live FX rates'; } }
   }
 
-  // ── Render grids ──────────────────────────────────────
   function renderCashGrid(){
-    const grid=document.getElementById('cash-grid');
-    grid.innerHTML='';
+    const grid=document.getElementById('cash-grid'); grid.innerHTML='';
     CASH_CCYS.forEach(ccy=>{
-      const card=document.createElement('div');
-      card.className='cash-card';
-      card.innerHTML=`
-        <div class="cash-card-label">${ccy}</div>
-        <input type="number" class="cash-inp" id="cash_${ccy}"
-          value="${cashValues[ccy]||0}" min="0" step="100" placeholder="0"
-          oninput="cashValues['${ccy}']=parseFloat(this.value)||0;calc()">
-        <div class="cash-converted" id="cash-conv-${ccy}"></div>
-      `;
+      const card=document.createElement('div'); card.className='cash-card';
+      card.innerHTML=`<div class="cash-card-label">${ccy}</div>
+        <input type="number" class="cash-inp" id="cash_${ccy}" value="${cashValues[ccy]||0}" min="0" step="100" placeholder="0" oninput="cashValues['${ccy}']=parseFloat(this.value)||0;calc()">
+        <div class="cash-converted" id="cash-conv-${ccy}"></div>`;
       grid.appendChild(card);
     });
   }
 
   function renderFxGrid(){
-    const base=getFxBase();
-    const prev={};
+    const base=getFxBase(); const prev={};
     CCYS.forEach(ccy=>{ if(ccy===base) return; const el=document.getElementById(fxId(ccy,base)); if(el) prev[fxId(ccy,base)]=el.value; });
-    const grid=document.getElementById('fx-grid');
-    grid.innerHTML='';
+    const grid=document.getElementById('fx-grid'); grid.innerHTML='';
     CCYS.forEach(ccy=>{
       const card=document.createElement('div'); card.className='fx-card';
-      if(ccy===base){
-        card.innerHTML=`<div class="fx-pair">${ccy} → ${base}</div><div class="fx-same">1.0000</div>`;
-      } else {
+      if(ccy===base){ card.innerHTML=`<div class="fx-pair">${ccy} → ${base}</div><div class="fx-same">1.0000</div>`; }
+      else{
         const key=fxId(ccy,base);
         const defVal=DEFAULT_FX[base]?.[ccy]!=null?DEFAULT_FX[base][ccy].toFixed(4):'1.0000';
         card.innerHTML=`<div class="fx-pair">${ccy} → ${base}</div>
@@ -567,7 +522,6 @@
     });
   }
 
-  // ── Row management ────────────────────────────────────
   function addRow(){
     if(rows.length>=10) return;
     const id=nextId++;
@@ -605,7 +559,7 @@
           <button class="btn-fetch-price" id="btn_fetch_${r.id}" onclick="fetchLivePrice(${r.id})">↓ Fetch</button>
           <span class="live-badge" id="live_badge_${r.id}" style="display:none"></span>
         </td>
-        <td style="width:72px"><input type="number" id="qty_${r.id}" value="${r.qty}" placeholder="0" min="1" step="1" oninput="updateField(${r.id},'qty',this.value);calc()"></td>
+        <td style="min-width:144px"><input type="number" id="qty_${r.id}" value="${r.qty}" placeholder="0" min="1" step="1" oninput="updateField(${r.id},'qty',this.value);calc()"></td>
         <td style="width:72px"><input type="number" id="mrate_${r.id}" value="${r.mrate}" placeholder="10" min="0" max="100" step="0.5" oninput="updateField(${r.id},'mrate',this.value);calc()"></td>
         <td style="width:80px"><input type="number" id="longFin_${r.id}" value="${r.longFin}" placeholder="3.50" min="0" step="0.01" oninput="updateField(${r.id},'longFin',this.value);calcFin()"></td>
         <td style="width:80px"><input type="number" id="shortFin_${r.id}" value="${r.shortFin}" placeholder="2.00" min="0" step="0.01" oninput="updateField(${r.id},'shortFin',this.value);calcFin()"></td>
@@ -626,10 +580,8 @@
   function fmt(n,dp=2){ if(isNaN(n)||!isFinite(n)) return '—'; return n.toLocaleString('en-US',{minimumFractionDigits:dp,maximumFractionDigits:dp}); }
   function pnlClass(v){ return 'computed '+(v>0?'pnl-pos':v<0?'pnl-neg':'pnl-zero'); }
 
-  // ── Financing ─────────────────────────────────────────
   function updateFinDropdown(){
-    const sel=document.getElementById('fin-pos-select');
-    const prevId=sel.value; sel.innerHTML='';
+    const sel=document.getElementById('fin-pos-select'); const prevId=sel.value; sel.innerHTML='';
     const valid=latestRowData.filter(r=>r.valid);
     if(valid.length===0){ document.getElementById('fin-no-pos').style.display='block'; document.getElementById('fin-body').style.display='none'; return; }
     document.getElementById('fin-no-pos').style.display='none'; document.getElementById('fin-body').style.display='block';
@@ -664,14 +616,13 @@
     document.getElementById('fin-formula').textContent=`Formula: ${rate}% × ${rd.posCcy} ${fmt(mv)} ÷ 360 = ${rd.posCcy} ${fmt(dp,4)} / day`+(totalDays>0?` · ${totalDays} days = ${rd.posCcy} ${fmt(tp,2)}`:'');
   }
 
-  // ── AI Analysis ───────────────────────────────────────
+  // ── Claude AI Analysis ────────────────────────────────
   async function runAiAnalysis(){
     const btn=document.getElementById('btn-ai');
     const output=document.getElementById('ai-output');
     const loading=document.getElementById('ai-loading');
     const sumCcy=getSumCcy();
 
-    // Build portfolio snapshot
     const glv   =document.getElementById('m-glv').textContent;
     const im    =document.getElementById('m-im').textContent;
     const fe    =document.getElementById('m-fe').textContent;
@@ -683,16 +634,20 @@
 
     const posDetails=latestRowData.filter(r=>r.valid).map(r=>{
       const ticker=(document.getElementById('ticker_'+r.id)||{}).value||'Unnamed';
-      const longFin=parseFloat((document.getElementById('longFin_'+r.id)||{}).value)||0;
+      const longFin =parseFloat((document.getElementById('longFin_'+r.id)||{}).value)||0;
       const shortFin=parseFloat((document.getElementById('shortFin_'+r.id)||{}).value)||0;
-      const finRate=r.dir==='Long'?longFin:shortFin;
+      const finRate =r.dir==='Long'?longFin:shortFin;
       const dailyFin=!isNaN(r.mv_pos)?(finRate/100)*r.mv_pos/360:0;
-      return `- ${ticker} (${r.dir}, ${r.posCcy}): Entry=${r.entry}, Current=${r.current||'N/A'}, Qty=${r.qty}, MktVal=${!isNaN(r.mv_pos)?fmt(r.mv_pos):'N/A'} ${r.posCcy}, P&L=${!isNaN(r.pnl_pos)?(r.pnl_pos>=0?'+':'')+fmt(r.pnl_pos)+' '+r.posCcy:'N/A'}, IM=${!isNaN(r.im_pos)?fmt(r.im_pos)+' '+r.posCcy:'N/A'}, Fin rate=${finRate}%, Daily fin cost≈${fmt(dailyFin,4)} ${r.posCcy}`;
+      return `- ${ticker} (${r.dir}, ${r.posCcy}): Entry=${r.entry||'N/A'}, Current=${r.current||'N/A'}, Qty=${r.qty||'N/A'}, MktVal=${!isNaN(r.mv_pos)?fmt(r.mv_pos):'N/A'} ${r.posCcy}, P&L=${!isNaN(r.pnl_pos)?(r.pnl_pos>=0?'+':'')+fmt(r.pnl_pos)+' '+r.posCcy:'N/A'}, IM=${!isNaN(r.im_pos)?fmt(r.im_pos)+' '+r.posCcy:'N/A'}, FinRate=${finRate}%/yr, DailyFinCost≈${fmt(dailyFin,4)} ${r.posCcy}`;
     }).join('\n');
 
-    if(!posDetails){ output.classList.remove('placeholder'); output.textContent='No valid positions found. Add at least one complete position before running analysis.'; return; }
+    if(!posDetails){
+      output.classList.remove('placeholder');
+      output.textContent='No valid positions found. Add at least one complete position before running analysis.';
+      return;
+    }
 
-    const prompt=`You are a CFD (Contract for Difference) portfolio risk analyst. Analyse the following CGSI Singapore CFD portfolio from first principles and provide clear, actionable insights. Be concise but thorough.
+    const prompt=`You are a CFD (Contract for Difference) portfolio risk analyst specialising in CGSI Singapore CFD products. Analyse the following portfolio from first principles and provide clear, structured, actionable insights.
 
 PORTFOLIO SNAPSHOT (Summary currency: ${sumCcy}):
 - Total cash deposited: ${totalCash}
@@ -700,40 +655,72 @@ PORTFOLIO SNAPSHOT (Summary currency: ${sumCcy}):
 - Total Initial Margin (MTM): ${im}
 - Free Equity (FE): ${fe}
 - Unused cash: ${unused}
-- Total market value of positions: ${tmv}
+- Total market value: ${tmv}
 - Total unrealised P&L: ${pnl}
 - Margin utilisation: ${util}
 
 OPEN POSITIONS:
 ${posDetails}
 
-Please analyse and provide:
-1. MARGIN CALL RISK: How close is the portfolio to a margin call (FE = 0)? What would need to happen for a margin call to be triggered?
-2. FREE EQUITY BUFFER HEALTH: Is the current FE buffer healthy, concerning, or critical? What is the buffer as % of total market exposure?
-3. POSITION CONCENTRATION: Is the portfolio well-diversified or overly concentrated? Any single-position risk?
-4. FINANCING COST BURDEN: What is the estimated monthly financing cost burden vs the portfolio value? Is it sustainable?
-5. LONG VS SHORT EXPOSURE: What is the net directional bias and key risks?
-6. SUGGESTED ACTIONS: Provide 3-5 specific, actionable suggestions based on first principles to improve the portfolio's risk profile.
+Provide a structured analysis covering:
 
-Keep your response clear, structured, and practical. Flag any critical risks prominently.`;
+1. MARGIN CALL RISK
+How close is the portfolio to a margin call (FE = 0)? What price moves would trigger it?
+
+2. FREE EQUITY BUFFER HEALTH
+Is the FE buffer healthy, concerning, or critical? What % of total exposure does it represent?
+
+3. POSITION CONCENTRATION
+Is the portfolio well-diversified or overly concentrated in any single position or direction?
+
+4. FINANCING COST BURDEN
+Estimate the monthly financing cost burden vs portfolio value. Is it sustainable long-term?
+
+5. LONG VS SHORT EXPOSURE
+What is the net directional bias and associated risks?
+
+6. SUGGESTED ACTIONS
+Provide 3–5 specific, prioritised, actionable recommendations to improve the portfolio's risk profile.
+
+Be direct, concise, and practical. Highlight any critical risks clearly. Use plain language suitable for a retail CFD trader.`;
 
     btn.disabled=true; btn.textContent='Analysing…';
     output.style.display='none';
     loading.style.display='flex';
 
     try{
-      const encoded=encodeURIComponent(prompt);
-      const url=`https://text.pollinations.ai/${encoded}`;
-      const r=await fetch(url);
-      if(!r.ok) throw new Error(`HTTP ${r.status}`);
-      const text=await r.text();
-      output.classList.remove('placeholder');
-      output.textContent=text.trim();
-      output.style.display='block';
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': CLAUDE_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: CLAUDE_MODEL,
+          max_tokens: 1500,
+          messages: [{ role: 'user', content: prompt }]
+        })
+      });
+
+      const data = await response.json();
+
+      if(data.content && data.content[0] && data.content[0].text){
+        output.classList.remove('placeholder');
+        output.textContent = data.content[0].text.trim();
+        output.style.display = 'block';
+      } else if(data.error){
+        output.classList.remove('placeholder');
+        output.textContent = `Claude API error: ${data.error.message||'Unknown error'}`;
+        output.style.display = 'block';
+      } else {
+        throw new Error('Unexpected response format');
+      }
     }catch(e){
       output.classList.remove('placeholder');
-      output.textContent=`Analysis failed: ${e.message}. This may be a temporary network issue. Please try again in a moment.`;
-      output.style.display='block';
+      output.textContent = `Analysis failed: ${e.message}.\n\nNote: Direct browser calls to the Anthropic API may be blocked by CORS on some hosting environments. The calculator is working correctly — this is a network restriction.`;
+      output.style.display = 'block';
     }finally{
       loading.style.display='none';
       btn.disabled=false; btn.textContent='Analyse portfolio';
@@ -824,7 +811,7 @@ Keep your response clear, structured, and practical. Flag any critical risks pro
   }
 
   // Init
-  document.getElementById('td-api-key').value=TD_API_KEY;
+  document.getElementById('td-api-key').value = TD_KEY;
   renderCashGrid(); renderFxGrid(); calc(); addRow();
 </script>
 </body>
