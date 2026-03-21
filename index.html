@@ -243,7 +243,7 @@
         </div>
         <div class="api-hint">
           Free at <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> — sign in with Google → Create API key → paste here.
-          Free tier: Gemini 1.5 Flash, 15 requests/min, no credit card needed.
+          Free tier: Gemini 2.0 Flash, 15 requests/min, no credit card needed.
         </div>
         <div class="api-status info" id="gemini-status">Key pre-loaded. Click "Test key" to verify.</div>
       </div>
@@ -420,7 +420,7 @@
       <div class="ai-placeholder" id="portfolio-placeholder">Click "Analyse portfolio" to get a risk/reward analysis of your leveraged positions versus your deposited cash.</div>
       <div class="ai-output" id="portfolio-output"></div>
       <div class="ai-disclaimer">For informational purposes only. Not financial advice.</div>
-      <div class="ai-free-badge">Powered by Google Gemini 1.5 Flash · Free tier · Get your key at aistudio.google.com</div>
+      <div class="ai-free-badge">Powered by Google Gemini 2.0 Flash · Free tier · Get your key at aistudio.google.com</div>
     </div>
 
     <!-- Tab 2: Stock deep dive -->
@@ -452,7 +452,7 @@
       <div class="ai-placeholder" id="stock-placeholder">Select a position and click "Analyse stock" to get an AI-powered deep dive including market narrative, short/long term views, and price target estimates.</div>
       <div class="ai-output" id="stock-output"></div>
       <div class="ai-disclaimer">Analysis is based on Gemini's training data. For the very latest news cross-reference with financial sources. Not financial advice.</div>
-      <div class="ai-free-badge">Powered by Google Gemini 1.5 Flash · Free tier · Get your key at aistudio.google.com</div>
+      <div class="ai-free-badge">Powered by Google Gemini 2.0 Flash · Free tier · Get your key at aistudio.google.com</div>
     </div>
 
   </div>
@@ -595,7 +595,7 @@
     if(!key){ setStatus('gemini-status','Please enter your Gemini API key first.','info'); return; }
     setStatus('gemini-status','Testing…','info');
     try{
-      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,{
+      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({contents:[{parts:[{text:'Reply with just the word OK'}]}]})
@@ -631,7 +631,7 @@
     output.style.display='none';
 
     try{
-      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,{
+      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
