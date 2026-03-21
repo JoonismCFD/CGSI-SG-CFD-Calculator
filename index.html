@@ -578,20 +578,31 @@
     output.style.display='none';
 
     try{
-      // Pollinations text API — completely free, no key
-      const encoded=encodeURIComponent(prompt);
-      const url=`https://text.pollinations.ai/${encoded}?model=mistral&json=false`;
-      const r=await fetch(url);
+      // Pollinations OpenAI-compatible endpoint — free, no key needed
+      const r=await fetch('https://text.pollinations.ai/openai',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'mistral',
+          messages:[
+            {role:'system',content:'You are a professional CFD portfolio risk analyst and equity analyst. Provide structured, detailed, and actionable analysis.'},
+            {role:'user',content:prompt}
+          ],
+          max_tokens:1500,
+          private:true
+        })
+      });
       if(!r.ok) throw new Error(`HTTP ${r.status}`);
-      const text=await r.text();
+      const d=await r.json();
+      const text=d?.choices?.[0]?.message?.content;
       if(text && text.trim().length>0){
         output.textContent=text.trim();
         output.style.display='block';
       } else {
-        throw new Error('Empty response received');
+        throw new Error('Empty response — try again in a few seconds');
       }
     }catch(e){
-      output.textContent=`Analysis failed: ${e.message}.\n\nThis may be a temporary issue with the free AI service. Please try again in a moment.`;
+      output.textContent=`Analysis failed: ${e.message}.\n\nPollinations AI allows one request every 15 seconds on the free tier. Please wait a moment and try again.`;
       output.style.display='block';
     }finally{
       loading.style.display='none';
