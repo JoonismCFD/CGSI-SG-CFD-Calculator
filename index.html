@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CGSI CFD Margin Calculator</title>
+  <script src="https://js.puter.com/v2/"></script>
   <style>
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     :root {
@@ -365,7 +366,7 @@
   </div>
 
   <!-- AI Analysis -->
-  <div class="divider-label"><span>AI analysis — free, no API key needed</span></div>
+  <div class="divider-label"><span>AI analysis — free via Puter.js, no signup needed</span></div>
   <div class="ai-card">
 
     <div class="ai-tabs">
@@ -398,7 +399,7 @@
       <div class="ai-placeholder" id="portfolio-placeholder">Click "Analyse portfolio" to get a risk/reward analysis of your leveraged positions versus your deposited cash.</div>
       <div class="ai-output" id="portfolio-output"></div>
       <div class="ai-disclaimer">For informational purposes only. Not financial advice.</div>
-      <div class="ai-free-badge">Powered by Pollinations AI (Mistral open-source model) · Free · No API key required</div>
+      <div class="ai-free-badge">Powered by Puter.js (GPT-4o mini) · 100% Free · No API key · No signup required</div>
     </div>
 
     <!-- Tab 2: Stock deep dive -->
@@ -430,7 +431,7 @@
       <div class="ai-placeholder" id="stock-placeholder">Select a position and click "Analyse stock" to get an AI-powered deep dive including market narrative, short/long term views, and price target estimates.</div>
       <div class="ai-output" id="stock-output"></div>
       <div class="ai-disclaimer">Analysis is based on AI training data — not live news. For the latest news, cross-reference with financial news sources. Not financial advice.</div>
-      <div class="ai-free-badge">Powered by Pollinations AI (Mistral open-source model) · Free · No API key required</div>
+      <div class="ai-free-badge">Powered by Puter.js (GPT-4o mini) · 100% Free · No API key · No signup required</div>
     </div>
 
   </div>
@@ -441,7 +442,7 @@
     IM = Current Price × Qty × Margin % (MTM) &nbsp;|&nbsp; Financing = Rate % × Mkt Val ÷ 360<br>
     Live prices: <a href="https://twelvedata.com" target="_blank" style="color:var(--text-tertiary)">Twelve Data</a> &nbsp;·&nbsp;
     Live FX: <a href="https://frankfurter.app" target="_blank" style="color:var(--text-tertiary)">frankfurter.app</a> (ECB) &nbsp;·&nbsp;
-    AI: <a href="https://pollinations.ai" target="_blank" style="color:var(--text-tertiary)">Pollinations AI</a> (free, open-source)
+    AI: <a href="https://puter.com" target="_blank" style="color:var(--text-tertiary)">Puter.js</a> (GPT-4o mini, free)
   </div>
 </div>
 
@@ -565,8 +566,8 @@
 
   function setStatus(id,msg,cls){ const el=document.getElementById(id); if(el){ el.textContent=msg; el.className='api-status '+cls; } }
 
-  // ── Pollinations AI ───────────────────────────────────
-  async function callPollinations(prompt, loadingId, placeholderId, outputId, btnId, btnLabel){
+  // ── Puter.js AI — free, no API key, no signup ────────
+  async function callAI(prompt, loadingId, placeholderId, outputId, btnId, btnLabel){
     const btn=document.getElementById(btnId);
     const loading=document.getElementById(loadingId);
     const placeholder=document.getElementById(placeholderId);
@@ -578,32 +579,21 @@
     output.style.display='none';
 
     try{
-      // Pollinations OpenAI-compatible endpoint — free, no key needed
-      const r=await fetch('https://text.pollinations.ai/openai',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          model:'mistral',
-          messages:[
-            {role:'system',content:'You are a professional CFD portfolio risk analyst and equity analyst. Provide structured, detailed, and actionable analysis.'},
-            {role:'user',content:prompt}
-          ],
-          max_tokens:1500,
-          private:true
-        })
+      // Puter.js — completely free, no API key, no signup needed
+      // Uses GPT-4o mini under the hood via Puter's free tier
+      const response = await puter.ai.chat(prompt, {
+        model: 'gpt-4o-mini'
       });
-      if(!r.ok) throw new Error(`HTTP ${r.status}`);
-      const d=await r.json();
-      const text=d?.choices?.[0]?.message?.content;
-      if(text && text.trim().length>0){
-        output.textContent=text.trim();
-        output.style.display='block';
+      const text = typeof response === 'string' ? response : response?.message?.content || response?.content || '';
+      if(text && text.trim().length > 0){
+        output.textContent = text.trim();
+        output.style.display = 'block';
       } else {
-        throw new Error('Empty response — try again in a few seconds');
+        throw new Error('Empty response received. Please try again.');
       }
     }catch(e){
-      output.textContent=`Analysis failed: ${e.message}.\n\nPollinations AI allows one request every 15 seconds on the free tier. Please wait a moment and try again.`;
-      output.style.display='block';
+      output.textContent = `Analysis failed: ${e.message}\n\nNote: Puter.js requires the page to be served over a web server (not opened as a local file). If you are viewing this on GitHub Pages, please try refreshing and trying again.`;
+      output.style.display = 'block';
     }finally{
       loading.style.display='none';
       btn.disabled=false; btn.textContent=btnLabel;
@@ -677,7 +667,7 @@ Is there dangerous concentration in a single stock, sector, or direction? What i
 7. PRIORITY ACTION ITEMS
 Provide exactly 5 specific, ranked, immediately actionable recommendations to improve the risk profile of this portfolio. Be concrete — name specific positions, amounts, and actions.`;
 
-    await callPollinations(prompt,'portfolio-loading','portfolio-placeholder','portfolio-output','btn-portfolio','Analyse portfolio');
+    await callAI(prompt,'portfolio-loading','portfolio-placeholder','portfolio-output','btn-portfolio','Analyse portfolio');
   }
 
   async function runStockAnalysis(){
@@ -731,7 +721,7 @@ Given the trader entered at ${rd.entry||'N/A'} ${rd.posCcy} and is currently ${r
 - If holding, what price level should trigger a stop-loss?
 - What is a realistic profit target?`;
 
-    await callPollinations(prompt,'stock-loading','stock-placeholder','stock-output','btn-stock','Analyse stock');
+    await callAI(prompt,'stock-loading','stock-placeholder','stock-output','btn-stock','Analyse stock');
   }
 
   // ── Cash & FX grid ────────────────────────────────────
