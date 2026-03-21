@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CGSI CFD Margin Calculator</title>
-  <script src="https://js.puter.com/v2/"></script>
   <style>
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     :root {
@@ -203,30 +202,52 @@
   <!-- Data settings -->
   <div class="api-card">
     <div class="api-card-header" onclick="toggleApiCard()">
-      <span class="api-card-title">Data settings (Twelve Data API key — stock prices)</span>
+      <span class="api-card-title">Data settings (API keys)</span>
       <span class="api-card-toggle" id="api-card-arrow">▼ show</span>
     </div>
     <div class="api-card-body" id="api-card-body">
-      <div class="api-row">
-        <label>API key</label>
-        <div class="api-key-wrap">
-          <input type="text" class="api-inp" id="td-api-key" autocomplete="off">
-          <button class="btn-eye" onclick="document.getElementById('td-api-key').classList.toggle('revealed')">👁</button>
+
+      <div style="margin-bottom:1rem;padding-bottom:1rem;border-bottom:0.5px solid var(--border)">
+        <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px">Twelve Data — live stock prices</div>
+        <div class="api-row">
+          <label>API key</label>
+          <div class="api-key-wrap">
+            <input type="text" class="api-inp" id="td-api-key" autocomplete="off">
+            <button class="btn-eye" onclick="document.getElementById('td-api-key').classList.toggle('revealed')">👁</button>
+          </div>
+          <button class="btn-api" onclick="testTdKey()">Test key</button>
         </div>
-        <button class="btn-api" onclick="testTdKey()">Test key</button>
-      </div>
-      <div class="api-hint">Free at <a href="https://twelvedata.com" target="_blank">twelvedata.com</a> — 800 calls/day, no credit card.</div>
-      <div class="api-status info" id="td-status">Key pre-loaded.</div>
-      <div class="exch-guide">
-        <div class="exch-guide-title">Ticker format by exchange</div>
-        <div class="exch-grid">
-          <div class="exch-item"><strong>US (NYSE/NASDAQ)</strong><br>TSLA, AAPL, MSFT<br><em>No suffix</em></div>
-          <div class="exch-item"><strong>Hong Kong (HKEX)</strong><br>0700, 9988, 0005<br><em>4-digit code</em></div>
-          <div class="exch-item"><strong>Malaysia (KLSE)</strong><br>1155, 5347, 1023<br><em>4-digit code</em></div>
-          <div class="exch-item"><strong>Japan (TSE)</strong><br>7203, 6758, 9984<br><em>4-digit code</em></div>
-          <div class="exch-item"><strong>Singapore (SGX)</strong><br>D05, Z74, U11<br><em>3-char code</em></div>
+        <div class="api-hint">Free at <a href="https://twelvedata.com" target="_blank">twelvedata.com</a> — 800 calls/day, no credit card.</div>
+        <div class="api-status info" id="td-status">Key pre-loaded.</div>
+        <div class="exch-guide">
+          <div class="exch-guide-title">Ticker format by exchange</div>
+          <div class="exch-grid">
+            <div class="exch-item"><strong>US (NYSE/NASDAQ)</strong><br>TSLA, AAPL, MSFT<br><em>No suffix</em></div>
+            <div class="exch-item"><strong>Hong Kong (HKEX)</strong><br>0700, 9988, 0005<br><em>4-digit code</em></div>
+            <div class="exch-item"><strong>Malaysia (KLSE)</strong><br>1155, 5347, 1023<br><em>4-digit code</em></div>
+            <div class="exch-item"><strong>Japan (TSE)</strong><br>7203, 6758, 9984<br><em>4-digit code</em></div>
+            <div class="exch-item"><strong>Singapore (SGX)</strong><br>D05, Z74, U11<br><em>3-char code</em></div>
+          </div>
         </div>
       </div>
+
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px">Google Gemini — AI portfolio &amp; stock analysis</div>
+        <div class="api-row">
+          <label>Gemini API key</label>
+          <div class="api-key-wrap">
+            <input type="text" class="api-inp" id="gemini-api-key" placeholder="AIza…" autocomplete="off">
+            <button class="btn-eye" onclick="document.getElementById('gemini-api-key').classList.toggle('revealed')">👁</button>
+          </div>
+          <button class="btn-api" onclick="testGeminiKey()">Test key</button>
+        </div>
+        <div class="api-hint">
+          Free at <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> — sign in with Google → Create API key → paste here.
+          Free tier: Gemini 1.5 Flash, 15 requests/min, no credit card needed.
+        </div>
+        <div class="api-status info" id="gemini-status">Key pre-loaded. Click "Test key" to verify.</div>
+      </div>
+
     </div>
   </div>
 
@@ -366,7 +387,7 @@
   </div>
 
   <!-- AI Analysis -->
-  <div class="divider-label"><span>AI analysis — free via Puter.js, no signup needed</span></div>
+  <div class="divider-label"><span>AI analysis — powered by Google Gemini</span></div>
   <div class="ai-card">
 
     <div class="ai-tabs">
@@ -399,7 +420,7 @@
       <div class="ai-placeholder" id="portfolio-placeholder">Click "Analyse portfolio" to get a risk/reward analysis of your leveraged positions versus your deposited cash.</div>
       <div class="ai-output" id="portfolio-output"></div>
       <div class="ai-disclaimer">For informational purposes only. Not financial advice.</div>
-      <div class="ai-free-badge">Powered by Puter.js (GPT-4o mini) · 100% Free · No API key · No signup required</div>
+      <div class="ai-free-badge">Powered by Google Gemini 1.5 Flash · Free tier · Get your key at aistudio.google.com</div>
     </div>
 
     <!-- Tab 2: Stock deep dive -->
@@ -430,8 +451,8 @@
       </div>
       <div class="ai-placeholder" id="stock-placeholder">Select a position and click "Analyse stock" to get an AI-powered deep dive including market narrative, short/long term views, and price target estimates.</div>
       <div class="ai-output" id="stock-output"></div>
-      <div class="ai-disclaimer">Analysis is based on AI training data — not live news. For the latest news, cross-reference with financial news sources. Not financial advice.</div>
-      <div class="ai-free-badge">Powered by Puter.js (GPT-4o mini) · 100% Free · No API key · No signup required</div>
+      <div class="ai-disclaimer">Analysis is based on Gemini's training data. For the very latest news cross-reference with financial sources. Not financial advice.</div>
+      <div class="ai-free-badge">Powered by Google Gemini 1.5 Flash · Free tier · Get your key at aistudio.google.com</div>
     </div>
 
   </div>
@@ -442,7 +463,7 @@
     IM = Current Price × Qty × Margin % (MTM) &nbsp;|&nbsp; Financing = Rate % × Mkt Val ÷ 360<br>
     Live prices: <a href="https://twelvedata.com" target="_blank" style="color:var(--text-tertiary)">Twelve Data</a> &nbsp;·&nbsp;
     Live FX: <a href="https://frankfurter.app" target="_blank" style="color:var(--text-tertiary)">frankfurter.app</a> (ECB) &nbsp;·&nbsp;
-    AI: <a href="https://puter.com" target="_blank" style="color:var(--text-tertiary)">Puter.js</a> (GPT-4o mini, free)
+    AI: <a href="https://aistudio.google.com" target="_blank" style="color:var(--text-tertiary)">Google Gemini</a> (free tier)
   </div>
 </div>
 
@@ -566,12 +587,43 @@
 
   function setStatus(id,msg,cls){ const el=document.getElementById(id); if(el){ el.textContent=msg; el.className='api-status '+cls; } }
 
-  // ── Puter.js AI — free, no API key, no signup ────────
+  // ── Google Gemini AI ──────────────────────────────────
+  function getGeminiKey(){ return document.getElementById('gemini-api-key').value.trim(); }
+
+  async function testGeminiKey(){
+    const key=getGeminiKey();
+    if(!key){ setStatus('gemini-status','Please enter your Gemini API key first.','info'); return; }
+    setStatus('gemini-status','Testing…','info');
+    try{
+      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({contents:[{parts:[{text:'Reply with just the word OK'}]}]})
+      });
+      const d=await r.json();
+      if(d.candidates?.[0]?.content?.parts?.[0]?.text){
+        setStatus('gemini-status','Gemini key valid ✓  Ready to analyse.','ok');
+      } else if(d.error){
+        setStatus('gemini-status',`Error: ${d.error.message}`,'err');
+      } else {
+        setStatus('gemini-status','Unexpected response — check key and try again.','err');
+      }
+    }catch(e){ setStatus('gemini-status',`Network error: ${e.message}`,'err'); }
+  }
+
   async function callAI(prompt, loadingId, placeholderId, outputId, btnId, btnLabel){
+    const key=getGeminiKey();
     const btn=document.getElementById(btnId);
     const loading=document.getElementById(loadingId);
     const placeholder=document.getElementById(placeholderId);
     const output=document.getElementById(outputId);
+
+    if(!key){
+      placeholder.style.display='none';
+      output.textContent='Please enter your free Gemini API key in Data Settings above.\n\nGet one free at: aistudio.google.com/apikey\n(Sign in with Google → Get API key → Create API key → copy & paste here)';
+      output.style.display='block';
+      return;
+    }
 
     btn.disabled=true; btn.textContent='Analysing…';
     loading.style.display='flex';
@@ -579,21 +631,34 @@
     output.style.display='none';
 
     try{
-      // Puter.js — completely free, no API key, no signup needed
-      // Uses GPT-4o mini under the hood via Puter's free tier
-      const response = await puter.ai.chat(prompt, {
-        model: 'gpt-4o-mini'
+      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          contents:[{
+            parts:[{text:prompt}]
+          }],
+          generationConfig:{
+            maxOutputTokens:2048,
+            temperature:0.7
+          },
+          systemInstruction:{
+            parts:[{text:'You are a professional CFD (Contract for Difference) portfolio risk analyst and equity analyst specialising in retail CFD trading. Provide structured, detailed, specific, and actionable analysis using the data provided.'}]
+          }
+        })
       });
-      const text = typeof response === 'string' ? response : response?.message?.content || response?.content || '';
-      if(text && text.trim().length > 0){
-        output.textContent = text.trim();
-        output.style.display = 'block';
+      const d=await r.json();
+      if(d.candidates?.[0]?.content?.parts?.[0]?.text){
+        output.textContent=d.candidates[0].content.parts[0].text.trim();
+        output.style.display='block';
+      } else if(d.error){
+        throw new Error(d.error.message);
       } else {
-        throw new Error('Empty response received. Please try again.');
+        throw new Error('Empty response — please try again.');
       }
     }catch(e){
-      output.textContent = `Analysis failed: ${e.message}\n\nNote: Puter.js requires the page to be served over a web server (not opened as a local file). If you are viewing this on GitHub Pages, please try refreshing and trying again.`;
-      output.style.display = 'block';
+      output.textContent=`Analysis failed: ${e.message}\n\nIf you see a 403 or API key error, verify your key in Data Settings above and click "Test key".`;
+      output.style.display='block';
     }finally{
       loading.style.display='none';
       btn.disabled=false; btn.textContent=btnLabel;
@@ -953,7 +1018,8 @@ Given the trader entered at ${rd.entry||'N/A'} ${rd.posCcy} and is currently ${r
   }
 
   // Init
-  document.getElementById('td-api-key').value=TD_KEY;
+  document.getElementById('td-api-key').value     = TD_KEY;
+  document.getElementById('gemini-api-key').value = 'AIzaSyDNGSewqtPXs1BXxfryPTdF3Um5rNyG6po';
   renderCashGrid(); renderFxGrid(); calc(); addRow();
 </script>
 </body>
